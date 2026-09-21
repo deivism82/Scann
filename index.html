@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scanntech Analytics v1.3 &middot; Zanlorenzi</title>
+<title>Scanntech Analytics v1.5 &middot; Zanlorenzi</title>
 <style>
 :root{
   --az0:#062A4E;      /* azul escuro — cabeçalhos */
@@ -235,6 +235,16 @@ label.fl{display:block;font-size:10.5px;color:var(--tx3);text-transform:uppercas
 .mpop .it input{width:auto;margin:0}
 .mpop .it .cnt{margin-left:auto;color:var(--tx3);font-size:10px}
 .mpop .ft{display:flex;gap:4px;margin-top:5px;border-top:1px solid var(--bd);padding-top:5px}
+/* ---------- v1.5: popup largo, % acumulado e atalhos de Pareto ---------- */
+.mpop.lg{min-width:520px;max-width:620px}
+.mpop.lg .ls{max-height:380px}
+.mpop .topN{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--tx2);
+  background:#F5F9FD;border:1px solid var(--bd);border-radius:4px;padding:3px 7px;margin-bottom:5px}
+.mpop .it .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.mpop .it .nm .sub2{color:var(--tx3);font-size:9.5px;margin-left:6px}
+.mpop .it.par .cnt{margin-left:auto;min-width:74px;text-align:right}
+.mpop .it .acu{min-width:52px;text-align:right;font-size:10px;color:var(--az);font-variant-numeric:tabular-nums}
+.mpop .it.par:hover .acu{font-weight:700}
 .fb.fx{min-width:186px}
 .fb.fx.act .fxn{border-color:var(--az);background:var(--azL)}
 .fxr{display:flex;align-items:center;gap:4px}
@@ -334,6 +344,21 @@ tr.agrp.agl2>td{background:var(--bg2);font-weight:600}
   background:linear-gradient(90deg,#C0392B,#E8A49C,#F5F0E8,#9ED0B6,#15715A)}
 
 /* ---------- classificação ---------- */
+/* ---------- v1.5: linha de TOTAL presa no rodapé da tabela ---------- */
+table.t tfoot td{position:sticky;bottom:0;z-index:6;background:#D4E4F4;font-weight:700;
+  border-top:2px solid var(--az3);box-shadow:0 -2px 6px rgba(6,42,78,.10)}
+table.t tfoot td.mdest{background:#C6DCF2}
+table.t tfoot tr:hover td{background:#D4E4F4}
+
+/* ---------- v1.5: lista de classificação condensada ---------- */
+table.t.cden th,table.t.cden td{overflow:hidden;text-overflow:ellipsis}
+table.t.cden.den{font-size:11px}
+table.t.cden.den td{padding:1px 4px;height:19px}
+table.t.cden.den th{padding:3px 4px;font-size:9.5px}
+table.t.cden.den input,table.t.cden.den select{font-size:10.5px;padding:0 3px;height:17px}
+table.t.cden.den .gbtn{font-size:9.5px;line-height:14px;padding:0 3px}
+table.t.cden.den .gbtns{gap:2px}
+table.t.cden.den .pill{font-size:9px;padding:0 4px}
 .clsi{width:100%;min-width:0}
 .clsi.ed{border-color:var(--az);background:var(--azL);font-weight:600}
 .clsi::placeholder{color:var(--tx3);font-style:italic}
@@ -341,14 +366,6 @@ tr.agrp.agl2>td{background:var(--bg2);font-weight:600}
   color:var(--tx2);cursor:pointer}
 .gbtn:hover{background:var(--azL);border-color:var(--az3);color:var(--az)}
 .gbtn.on{background:var(--az);color:#fff;border-color:var(--az)}
-#imgpane{border:1px solid var(--bd);border-radius:7px;background:#fff;overflow:hidden}
-#imgpane .ih{background:var(--az0);color:#fff;padding:5px 9px;font-size:11.5px;display:flex;gap:8px;align-items:center}
-#imgpane .ih .sp{flex:1}
-#imgpane .ih button{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:4px;padding:1px 8px;font-size:11px}
-#imgpane .ib{padding:7px;display:flex;flex-wrap:wrap;gap:6px;min-height:120px;align-content:flex-start;
-  max-height:330px;overflow:auto}
-#imgpane .ib img{height:104px;width:auto;border:1px solid var(--bd);border-radius:5px;background:#fff;object-fit:contain}
-#imgpane .ib .ph{color:var(--tx3);font-size:11.5px;padding:18px;text-align:center;width:100%}
 #dock{position:fixed;right:12px;bottom:12px;width:430px;z-index:700;box-shadow:0 14px 40px rgba(6,42,78,.28);
   border-radius:8px;display:none}
 #dock.on{display:block}
@@ -386,6 +403,19 @@ tr.selrow:hover>td{background:#CFE2F4!important}
 .uni2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:1100px){.uni2{grid-template-columns:1fr}}
 .mapa{display:none}
+/* ---------- v1.5: largura da tabela ---------- */
+table.t.fit{width:auto}
+.tw.fit{display:block}
+table.t td.mdest,table.t th.mdest{background:#E7F0FA}
+table.t th.mdest{background:#0B4F8F}
+table.t tbody tr:hover td.mdest{background:#D8E8F7}
+table.t tr.tot td.mdest{background:#D4E4F4}
+/* largura em pixels: as larguras mínimas das colunas têm de sair do caminho,
+   senão a tabela nunca encolhe abaixo da soma delas */
+table.t.fixw th,table.t.fixw td{min-width:0!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr.verif td{background:#F3F7F3;opacity:.72}
+.btn.ok{border-color:#15715A;color:#0E5744;background:#EEF7F3}
+.btn.ok:hover{background:#DFF0E8}
 .btn.sm.d{border-color:#B7791F;color:#8A5A10;background:#FDF8EC}
 .btn.sm.d:hover{background:#FBF0D6}
 @media print{#top,#nav,#gfil .gh,.noprint{display:none!important}#wrap{padding:0}}
@@ -393,7 +423,7 @@ tr.selrow:hover>td{background:#CFE2F4!important}
 </head>
 <body>
 <div id="boot"><div class="bx">
-  <h1>Scanntech Analytics <span style="opacity:.6;font-weight:400">v1.3</span></h1>
+  <h1>Scanntech Analytics <span style="opacity:.6;font-weight:400">v1.5</span></h1>
   <div class="sub">Inteligência de Mercado &middot; Zanlorenzi Bebidas</div>
   <div class="drop" id="bdrop">
     <b>Solte aqui a base Scanntech (.csv) ou o modelo (.json)</b>
@@ -416,7 +446,7 @@ tr.selrow:hover>td{background:#CFE2F4!important}
 <div id="app" style="display:none">
 <div id="top">
   <div class="brand">SCANNTECH ANALYTICS <small>Zanlorenzi &middot; Inteligência de Mercado</small></div>
-  <span class="vtag">v1.3</span>
+  <span class="vtag">v1.5</span>
   <div class="sp"></div>
   <div class="tk" id="tk"></div>
   <button class="tb" onclick="irPara('dados')">dados / json</button>
@@ -437,11 +467,11 @@ tr.selrow:hover>td{background:#CFE2F4!important}
 
 <script>
 /* ==========================================================================
-   SCANNTECH ANALYTICS v1.3 — Zanlorenzi Bebidas
+   SCANNTECH ANALYTICS v1.5 — Zanlorenzi Bebidas
    Ferramenta de análise e classificação da base Scanntech (sell-out).
    Arquivo único, sem dependências externas. Tudo roda no navegador.
    ========================================================================== */
-var VERSAO = '1.3';
+var VERSAO = '1.5';
 
 /* ------------------------------------------------------------- formatação */
 function round(v,c){ var p=Math.pow(10,c||0); return Math.round((+v||0)*p)/p; }
@@ -720,25 +750,29 @@ function escalaCor(vals){
     return 'background:rgb('+c.join(',')+');color:'+(lum<0.55?'#fff':'#1E2430');
   };
 }
+
 /* ========================================================== ESTADO DE UI == */
 var S = {
   tela:'mercado',
   larg:{},                               /* larguras de coluna por tabela */
+  ltab:{},                               /* largura da tabela: 'auto' | 'full' | número em px */
   merc:{dim:'mk', dim2:'', dim3:'', fech:{}, mapMet:'fat', mapAgr:'uf',
         ord:{k:'fat', d:-1}, ocultas:{}, max:1000},
   piv :{lin:'mk', lin2:'', lin3:'', col:'uf', met:'fat', ord:'tot', fech:{},
         maxCol:40, largRot:280, larg:0, totEsq:false},
   evo :{dim:'cat', dim2:'', dim3:'', tipo:'linha', fech:{}, sel:'',
-        mets:['fat','lt','ru'], rot:true, rotS:false, eixo:{}, serie:'', nSerie:6},
+        mets:['fat','lt','ru'], rot:true, rotS:false, eixo:{}, serie:'', nSerie:6, eixoX:'auto'},
   pri :{dim:'mk', met:'ru', fech:{}, elast:true},
   rank:{dim:'mk', dim2:'', dim3:'', met:'fat', n:25, anoAt:'', anoAn:'', fech:{}},
   shr :{dim:'uf', alvo:'zl', fech:{}},
   dist:{dim:'mk', met:'dn', fech:{}},
-  cls :{n1:'mk', n2:'sku', fech:{}, auto:false, foco:'', so:'todos', busca:'', max:400},
-  err :{tipo:'', sev:''},
+  cls :{n1:'mk', n2:'sku', fech:{}, auto:false, foco:'', so:'todos', busca:'', max:400,
+        ocultas:{}, den:true},
+  err :{tipo:'', sev:'', verif:false},
   uni :{buscaP:'', buscaA:'', principal:'', absorver:[]},
   dock:false
 };
+
 /* ==========================================================================
    MODELO DE DADOS
    O cubo é guardado em arrays tipados paralelos, no grão
@@ -996,7 +1030,10 @@ var UF_POS = {
 
 /* ============================================ CONTEXTO (filtros aplicados) */
 var _ctx=null, _ctxSig=null;
-function ctxLimpar(){ _ctx=null; _ctxSig=null; }
+function ctxLimpar(){
+  _ctx=null; _ctxSig=null;
+  if(typeof pubLimpar==='function') pubLimpar();
+}
 
 /* devolve máscaras e agregados por SKU sob o recorte atual */
 function ctx(){
@@ -1164,6 +1201,7 @@ function dim(id){
   for(var i=0;i<DIMS.length;i++) if(DIMS[i][0]===id) return DIMS[i];
   return DIMS[0];
 }
+
 /* ==========================================================================
    MAPA DO BRASIL
    Malha dos 27 estados em SVG, embutida no arquivo.
@@ -1240,6 +1278,7 @@ function mapaBrasilSVG(ag, mt, selecionados){
   s+='</svg>';
   return s;
 }
+
 /* ==========================================================================
    FILTROS DINÂMICOS — o padrão do projeto
    Multi-seleção com busca; as opções de cada filtro consideram todos os
@@ -1271,6 +1310,7 @@ Filtros.prototype.defs = function(){
     {key:'faixa', label:'Faixa volumetria', esc:'sku'},
     {key:'fab'  , label:'Fabricante'      , esc:'sku'},
     {key:'mk'   , label:'Marca'           , esc:'sku', wide:true},
+    {key:'sku'  , label:'SKU (produto)'   , esc:'sku', wide:true, pareto:true},
     {key:'conc' , label:'É concorrente'   , esc:'sku'},
     {key:'corte', label:'Corte 80-20'     , esc:'sku'},
     {key:'zl'   , label:'Origem'          , esc:'sku'},
@@ -1343,10 +1383,18 @@ Filtros.prototype.valSku = function(k,P){
     case 'corte': return P.corte?'80-20':'fora do corte';
     case 'zl':    return P.zl?'Zanlorenzi':'Mercado';
     case 'ok':    return P.ok?'classificado':'a classificar';
+    case 'sku':   return P.cb;
   }
   return '';
 };
 
+/* o valor guardado no filtro de SKU é o CÓDIGO DE BARRAS (é o que é único);
+   na tela, porém, o que tem de aparecer é o nome do produto */
+Filtros.prototype.rotulo = function(k, v){
+  if(k!=='sku') return String(v);
+  var P=(typeof prodDeCb==='function') ? prodDeCb(v) : null;
+  return P ? P.nome : String(v);
+};
 Filtros.prototype.passaPer = function(i, exceto){
   for(var k=0;k<PER_KEYS.length;k++){
     var key=PER_KEYS[k]; if(key===exceto) continue;
@@ -1367,7 +1415,7 @@ Filtros.prototype.passaBase = function(i){
   return s.has(DB.bases[i]);
 };
 Filtros.prototype.passaSkuCat = function(P, exceto){
-  var ks=['cat','sub','sabor','pais','emb','faixa','fab','mk','conc','corte','zl','ok'];
+  var ks=['cat','sub','sabor','pais','emb','faixa','fab','mk','sku','conc','corte','zl','ok'];
   for(var i=0;i<ks.length;i++){
     var k=ks[i]; if(k===exceto) continue;
     var s=this.sel[k];
@@ -1392,6 +1440,50 @@ Filtros.prototype.passaFaixas = function(m, exceto){
   }
   return true;
 };
+
+/* ==========================================================================
+   BASE DAS OPÇÕES  (corrigido na v1.4)
+   As opções de um filtro têm de ser calculadas SEM aquele filtro, senão as
+   alternativas não escolhidas ficam com faturamento zero e somem da lista —
+   era o que obrigava a clicar em "nenhum → ok" para ver tudo de novo.
+   Esta função agrega por SKU aplicando só período + UF + tipo de base; os
+   filtros de SKU são aplicados depois, um a um, deixando de fora o que está
+   sendo editado.
+   ========================================================================== */
+var _pubSig=null, _pubCache=null;
+function basePUB(){
+  if(!DB || !D.pronto) return null;
+  var nS=DB.skus.length, nP=DB.pers.length, nU=DB.ufs.length, nB=DB.bases.length;
+  var perM=new Uint8Array(nP), ufM=new Uint8Array(nU), baseM=new Uint8Array(nB);
+  var sig=[], i;
+  for(i=0;i<nP;i++){ perM[i]=GF.passaPer(i)?1:0; sig.push(perM[i]); }
+  sig.push('|');
+  for(i=0;i<nU;i++){ ufM[i]=GF.passaUF(i)?1:0; sig.push(ufM[i]); }
+  sig.push('|');
+  for(i=0;i<nB;i++){ baseM[i]=GF.passaBase(i)?1:0; sig.push(baseM[i]); }
+  sig.push('|'+UNI_VER+'|'+nS);
+  var s=sig.join('');
+  if(_pubCache && _pubSig===s) return _pubCache;
+  var fat=new Float64Array(nS), ml=new Float64Array(nS), un=new Float64Array(nS);
+  var N=DB.n, cP=DB.cPer, cU=DB.cUF, cB=DB.cBase, cS=DB.cSku, rep=D.rep;
+  for(i=0;i<N;i++){
+    if(!perM[cP[i]] || !ufM[cU[i]] || !baseM[cB[i]]) continue;
+    var r=rep[cS[i]];
+    fat[r]+=DB.vFat[i]; ml[r]+=DB.vMl[i]; un[r]+=DB.vUn[i];
+  }
+  _pubSig=s; _pubCache={fat:fat, ml:ml, un:un};
+  return _pubCache;
+}
+function pubLimpar(){ _pubSig=null; _pubCache=null; }
+/* métricas de um SKU sobre a base PUB, para testar as faixas numéricas */
+function pubMet(B, i){
+  var P=D.prod[i], lt=B.ml[i]/1000;
+  var unr = P.vol>0 ? B.ml[i]/P.vol : B.un[i];
+  return {fat:B.fat[i], lt:lt, un:unr,
+          rl: lt>0? B.fat[i]/lt : NaN,
+          ru: unr>0? B.fat[i]/unr : NaN,
+          vol:P.vol};
+}
 
 /* --------------------------------------------------- opções de cada filtro */
 var _domSig=null, _domCache=null;
@@ -1434,15 +1526,18 @@ Filtros.prototype.opcoes = function(k){
       var v2=this.valUF(k,i); m[v2]=(m[v2]||0)+(e3?e3.ufF[i]:0);
     }
   }else{
+    var B=basePUB(); if(!B) return [];
     for(i=0;i<DB.skus.length;i++){
       if(D.rep[i]!==i) continue;
-      if(C.fat[i]<=0) continue;
+      if(B.fat[i]<=0) continue;
       var P=D.prod[i];
-      if(!this.passaSkuCat(P, k)) continue;
-      var v3=this.valSku(k,P); m[v3]=(m[v3]||0)+C.fat[i];
+      if(!this.passaSkuCat(P, k)) continue;      /* todos menos o que está sendo editado */
+      if(!this.passaFaixas(pubMet(B,i))) continue;
+      var v3=this.valSku(k,P); m[v3]=(m[v3]||0)+B.fat[i];
     }
   }
-  var out=Object.keys(m).map(function(x){ return {v:x, n:m[x]}; });
+  var self0=this;
+  var out=Object.keys(m).map(function(x){ return {v:x, n:m[x], lab:self0.rotulo(k,x)}; });
   if(k==='mes'){
     out.sort(function(a,b){ return mesOrd(a.v)-mesOrd(b.v); });
   }else if(k==='mesano'){
@@ -1450,8 +1545,13 @@ Filtros.prototype.opcoes = function(k){
   }else if(k==='ano'){
     out.sort(function(a,b){ return String(a.v).localeCompare(String(b.v)); });
   }else{
-    out.sort(function(a,b){ return b.n-a.n || String(a.v).localeCompare(String(b.v),'pt'); });
+    out.sort(function(a,b){ return b.n-a.n || String(a.lab).localeCompare(String(b.lab),'pt'); });
   }
+  /* % acumulado da lista ordenada — "até aqui são 80% do faturamento do recorte" */
+  var tt=0; out.forEach(function(x){ tt+=(x.n>0?x.n:0); });
+  var ac=0;
+  out.forEach(function(x){ ac+=(x.n>0?x.n:0); x.ac = tt>0? ac/tt : 0; });
+  out.tot=tt;
   return out;
 };
 function mesOrd(s){
@@ -1460,7 +1560,7 @@ function mesOrd(s){
 }
 Filtros.prototype.podar = function(){
   var self=this, mudou=false;
-  ['ano','mesano','mes','reg','uf','cat','sub','sabor','pais','emb','faixa','fab','mk','conc','corte','zl','ok']
+  ['ano','mesano','mes','reg','uf','cat','sub','sabor','pais','emb','faixa','fab','mk','sku','conc','corte','zl','ok']
   .forEach(function(k){
     var s=self.sel[k]; if(!s||!s.size) return;
     var disp=new Set(self.opcoes(k).map(function(o){return o.v;}));
@@ -1469,13 +1569,16 @@ Filtros.prototype.podar = function(){
   if(mudou) ctxLimpar();
   return mudou;
 };
+/* mesmos limites do slider, também sem a própria faixa — senão ele encolhe
+   a cada ajuste e não dá mais para voltar */
 Filtros.prototype.limites = function(k){
-  var C=ctx(); if(!C) return [0,0];
+  var B=basePUB(); if(!B) return [0,0];
   var d=this.def(k), lo=Infinity, hi=-Infinity;
   for(var i=0;i<DB.skus.length;i++){
-    if(D.rep[i]!==i || !C.catM[i] || C.fat[i]<=0) continue;
-    var P=D.prod[i], lt=C.ml[i]/1000, unr=P.vol>0? C.ml[i]/P.vol : C.un[i];
-    var m={fat:C.fat[i], lt:lt, un:unr, rl:lt>0?C.fat[i]/lt:NaN, ru:unr>0?C.fat[i]/unr:NaN, vol:P.vol};
+    if(D.rep[i]!==i || B.fat[i]<=0) continue;
+    var P=D.prod[i];
+    if(!this.passaSkuCat(P)) continue;
+    var m=pubMet(B,i);
     if(!this.passaFaixas(m,k)) continue;
     var v=d.num(m);
     if(!isFinite(v)) continue;
@@ -1495,7 +1598,7 @@ Filtros.prototype.html = function(){
     if(d.esc==='num'){ return; }
     var s=self.sel[d.key], n=s.size;
     var lbl = d.unico ? (n? Array.from(s)[0] : '—')
-                      : (n===0?'todos':(n===1? Array.from(s)[0] : n+' selecionados'));
+                      : (n===0?'todos':(n===1? self.rotulo(d.key, Array.from(s)[0]) : n+' selecionados'));
     out += '<div class="fb'+(d.wide?' wide':'')+'" data-fb="'+d.key+'">'+
       '<label class="fl">'+d.label+'</label>'+
       '<div class="msel'+(d.unico?' uni':(n?' act':''))+'" onclick="fpop(\''+d.key+'\',this)" title="'+esc(lbl)+'">'+
@@ -1543,22 +1646,25 @@ Filtros.prototype.faixaHTML = function(d){
 };
 
 var _fstage=null;
+var FPOP_MAX=600;          /* linhas desenhadas por vez no popup */
 function fpop(key, el){
   if(!DB) return;
   fpopFechar(true);
   var d=GF.def(key), ops=GF.opcoes(key);
-  var pop=document.createElement('div'); pop.className='mpop';
-  _fstage={key:key, sel:new Set(GF.sel[key]), pop:pop, unico:!!d.unico};
+  var pop=document.createElement('div'); pop.className='mpop'+(d.wide?' lg':'');
+  var pareto = !d.unico && ops.length>=8 && ['ano','mesano','mes'].indexOf(key)<0;
+  _fstage={key:key, sel:new Set(GF.sel[key]), pop:pop, unico:!!d.unico,
+           ops:ops, tot:ops.tot||0, pareto:pareto, filtro:''};
   var cab = d.unico
     ? '<div class="stg">seleção única &mdash; Base Total <b>ou</b> Samestore (somar os dois duplica o mercado)</div>'
-    : '<div class="stg" id="fstgN">'+_fstage.sel.size+' selecionado(s) &mdash; aplica ao clicar em <b>ok</b></div>';
-  pop.innerHTML = (ops.length>12?'<div class="sr"><input type="text" placeholder="filtrar opções&hellip;" oninput="fpopFiltrar(this)"></div>':'')+
-    cab+'<div class="ls">'+
-    ops.map(function(o){
-      return '<label class="it" data-v="'+esc(o.v)+'"><input type="'+(d.unico?'radio':'checkbox')+'" name="fst" '+
-        (_fstage.sel.has(o.v)?'checked':'')+' onchange="fstage(this.parentNode.dataset.v,this.checked)">'+
-        '<span>'+esc(o.v)+'</span><span class="cnt">'+mmr(o.n)+'</span></label>';
-    }).join('')+'</div>'+
+    : '<div class="stg" id="fstgN"></div>';
+  var topo = pareto
+    ? '<div class="sr topN">pegar de uma vez os maiores que fazem '+
+        [80,90,95].map(function(x){ return '<button class="btn xs" onclick="fpopTop('+x+')">'+x+'%</button>'; }).join(' ')+
+        ' do faturamento</div>'
+    : '';
+  pop.innerHTML = (ops.length>12?'<div class="sr"><input type="text" placeholder="filtrar opções&hellip;" oninput="fpopFiltrar(this.value)"></div>':'')+
+    topo+cab+'<div class="ls" id="fpopLs"></div>'+
     '<div class="ft">'+
     (d.unico?'':'<button class="btn sm" onclick="fallStage(1)">todos</button>'+
      '<button class="btn sm" onclick="fallStage(0)">nenhum</button>')+
@@ -1566,30 +1672,89 @@ function fpop(key, el){
     '<button class="btn sm" onclick="fpopFechar(true)">cancelar</button>'+
     '<button class="btn sm p" onclick="fpopAplicar()">ok</button></div>';
   el.parentNode.appendChild(pop);
+  fpopLista();
+  fpopContador();
   setTimeout(function(){ var i=pop.querySelector('input[type=text]'); if(i) i.focus(); },30);
 }
-function fpopFiltrar(inp){
-  var t=semAcento(inp.value);
-  inp.closest('.mpop').querySelectorAll('.it').forEach(function(it){
-    it.style.display = semAcento(it.dataset.v).indexOf(t)>=0 ? '' : 'none';
+/* a lista é redesenhada a partir do array completo — assim a busca alcança
+   também o que não coube nas primeiras FPOP_MAX linhas */
+function fpopVisiveis(){
+  if(!_fstage) return [];
+  var t=semAcento(_fstage.filtro||'');
+  if(!t) return _fstage.ops;
+  return _fstage.ops.filter(function(o){
+    return semAcento(o.lab).indexOf(t)>=0 || semAcento(String(o.v)).indexOf(t)>=0;
   });
+}
+function fpopLista(){
+  if(!_fstage) return;
+  var el=h('fpopLs'); if(!el) return;
+  var d=GF.def(_fstage.key), vis=fpopVisiveis(), corta=vis.length>FPOP_MAX;
+  var mostra=corta? vis.slice(0,FPOP_MAX) : vis;
+  /* o que já está marcado tem de aparecer, mesmo fora do corte */
+  if(corta){
+    var dentro=new Set(mostra.map(function(o){return o.v;}));
+    vis.forEach(function(o){ if(_fstage.sel.has(o.v) && !dentro.has(o.v)) mostra.push(o); });
+  }
+  el.innerHTML = mostra.map(function(o){
+    var cod = (_fstage.key==='sku' && o.lab!==o.v) ? '<span class="sub2">'+esc(o.v)+'</span>' : '';
+    return '<label class="it'+(_fstage.pareto?' par':'')+'" data-v="'+esc(o.v)+'">'+
+      '<input type="'+(d.unico?'radio':'checkbox')+'" name="fst" '+
+      (_fstage.sel.has(o.v)?'checked':'')+' onchange="fstage(this.parentNode.dataset.v,this.checked)">'+
+      '<span class="nm">'+esc(o.lab)+cod+'</span>'+
+      '<span class="cnt">'+mmr(o.n)+'</span>'+
+      (_fstage.pareto?'<span class="acu" title="somando desta linha para cima">'+pc(o.ac,1)+'</span>':'')+
+      '</label>';
+  }).join('') +
+  (corta?'<div class="tag" style="padding:5px 8px">mostrando '+nf(FPOP_MAX)+' de '+nf(vis.length)+
+    ' &mdash; use a busca acima para achar o resto</div>':'');
+}
+function fpopFiltrar(v){
+  if(!_fstage) return;
+  _fstage.filtro=v||'';
+  fpopLista();
+}
+/* contador ao vivo: quanto do recorte já está marcado */
+function fpopContador(){
+  var n=h('fstgN'); if(!n || !_fstage) return;
+  if(_fstage.unico) return;
+  var soma=0, k=0;
+  _fstage.ops.forEach(function(o){ if(_fstage.sel.has(o.v)){ soma+=o.n; k++; } });
+  var tot=_fstage.tot||0;
+  if(!k){
+    n.innerHTML='nada marcado &mdash; <b>todos</b> ('+mmr(tot)+') &middot; aplica ao clicar em <b>ok</b>';
+    return;
+  }
+  n.innerHTML='<b>'+nf(k)+'</b> selecionado(s) &middot; <b>'+mmr(soma)+'</b>'+
+    (tot>0?' &middot; <b>'+pc(soma/tot,1)+'</b> do faturamento do recorte':'')+
+    ' &middot; aplica ao clicar em <b>ok</b>';
+}
+/* marca de cima para baixo até fechar N% do faturamento */
+function fpopTop(pct){
+  if(!_fstage) return;
+  var alvo=pct/100, ac=0, tot=_fstage.tot||0;
+  _fstage.sel=new Set();
+  if(tot>0) for(var i=0;i<_fstage.ops.length;i++){
+    var o=_fstage.ops[i];
+    if(o.n<=0) break;
+    _fstage.sel.add(o.v);
+    ac+=o.n;
+    if(ac/tot>=alvo) break;
+  }
+  fpopLista(); fpopContador();
 }
 function fstage(v,on){
   if(!_fstage) return;
   if(_fstage.unico){ _fstage.sel=new Set([v]); return; }
   if(on) _fstage.sel.add(v); else _fstage.sel.delete(v);
-  var n=h('fstgN');
-  if(n) n.innerHTML=_fstage.sel.size+' selecionado(s) — aplica ao clicar em <b>ok</b>';
+  fpopContador();
 }
 function fallStage(on){
   if(!_fstage) return;
-  _fstage.pop.querySelectorAll('.it').forEach(function(it){
-    if(it.style.display==='none') return;
-    var cb=it.querySelector('input'); cb.checked=!!on;
-    if(on) _fstage.sel.add(it.dataset.v); else _fstage.sel.delete(it.dataset.v);
-  });
-  var n=h('fstgN');
-  if(n) n.innerHTML=_fstage.sel.size+' selecionado(s) — aplica ao clicar em <b>ok</b>';
+  var vis=fpopVisiveis();
+  vis.forEach(function(o){ if(on) _fstage.sel.add(o.v); else _fstage.sel.delete(o.v); });
+  _fstage.pop.querySelectorAll('.it input').forEach(function(cb){ cb.checked=!!on; });
+  fpopContador();
 }
 function fpopAplicar(){
   if(!_fstage) return;
@@ -1625,6 +1790,7 @@ document.addEventListener('click',function(e){
 document.addEventListener('keydown',function(e){
   if(e.key==='Enter' && _fstage && e.target.closest('.mpop')){ e.preventDefault(); fpopAplicar(); }
 });
+
 /* ==========================================================================
    ÁRVORE DE AGREGAÇÃO, PIVÔ COM MAPA DE CALOR E EXPORTAÇÃO
    ========================================================================== */
@@ -1781,6 +1947,89 @@ document.addEventListener('mouseup', function(){
   _rzE=null; document.body.style.cursor='';
   redesenhar(renderTudo);
 });
+/* ------------------------------------------- largura da tabela (v1.4) ----
+   'auto' = a tabela termina onde as colunas terminam (bom para print)
+   'full' = estica até a borda da janela, como era antes
+   número = largura fixa em pixels                                          */
+function ltabModo(id){ var m=(S.ltab||{})[id]; return m===undefined? 'auto' : m; }
+function setLtab(id, v){
+  S.ltab=S.ltab||{};
+  S.ltab[id]= (v==='auto'||v==='full') ? v : Math.max(320, numd(v)||0);
+  redesenhar(renderTudo);
+}
+function ltabCls(id){
+  var m=ltabModo(id);
+  if(m==='full') return '';
+  return (typeof m==='number' && m>0) ? ' fit fixw' : ' fit';
+}
+function ltabStyle(id){
+  var m=ltabModo(id);
+  return (typeof m==='number' && m>0) ? ' style="width:'+m+'px;table-layout:fixed"' : '';
+}
+function ltabCtl(id){
+  var m=ltabModo(id);
+  return '<div class="fb" style="min-width:auto"><label class="fl">Largura da tabela</label>'+
+    '<div class="seg">'+
+      '<button class="'+(m==='auto'?'on':'')+'" onclick="setLtab(\''+id+'\',\'auto\')" '+
+        'title="a tabela termina onde as colunas terminam — melhor para print">ajustar ao conteúdo</button>'+
+      '<button class="'+(m==='full'?'on':'')+'" onclick="setLtab(\''+id+'\',\'full\')">ocupar a janela</button>'+
+    '</div> '+
+    '<input type="number" step="20" style="width:92px;display:inline-block;margin-left:5px" '+
+      'data-k="ltab-'+id+'" placeholder="fixa (px)" value="'+(typeof m==='number'?m:'')+'" '+
+      'onchange="setLtab(\''+id+'\',this.value)"></div>';
+}
+/* Quando a tabela tem uma largura fixa em pixels, as larguras das colunas
+   (que somam a largura “natural”) têm de encolher na mesma proporção — senão
+   o table-layout:fixed estica a tabela de volta para a soma delas.          */
+function ltabAjustar(){
+  var ts=document.querySelectorAll('#tela table.t.fixw');
+  for(var i=0;i<ts.length;i++){
+    var t=ts[i], alvo=numd(t.style.width);
+    if(!(alvo>0)) continue;
+    var trs=t.querySelectorAll('thead tr'), linha=null;
+    for(var r=0;r<trs.length;r++)
+      if(!linha || trs[r].children.length>linha.children.length) linha=trs[r];
+    if(!linha || !linha.children.length) continue;
+    var ws=[], soma=0;
+    for(var j=0;j<linha.children.length;j++){
+      var w=linha.children[j].getBoundingClientRect().width;
+      ws.push(w); soma+=w;
+    }
+    if(soma<=0) continue;
+    var f=alvo/soma;
+    if(Math.abs(f-1)<0.01) continue;
+    for(j=0;j<linha.children.length;j++){
+      var nw=Math.max(16, Math.round(ws[j]*f));
+      linha.children[j].style.width=nw+'px';
+      linha.children[j].style.minWidth='0';
+    }
+  }
+}
+/* ==========================================================================
+   ALTURA DAS TABELAS COM TOTAL FIXO (v1.5)
+   A linha de TOTAL fica presa no rodapé da tabela (tfoot sticky). Para ela
+   estar SEMPRE à vista, a caixa de rolagem não pode passar do fim da janela:
+   aqui a altura é recalculada a cada desenho e a cada rolagem da página.
+   O teto é a própria janela, então a caixa nunca cresce sem parar.
+   ========================================================================== */
+function tabAltura(){
+  var els=document.querySelectorAll('.tw.hfit');
+  var topo=79;                                  /* topbar + nav grudados */
+  for(var i=0;i<els.length;i++){
+    var e=els[i], r=e.getBoundingClientRect();
+    var h=window.innerHeight - Math.max(r.top, topo) - 16;
+    if(h<260) h=260;
+    e.style.maxHeight=Math.round(h)+'px';
+  }
+}
+var _altRaf=null;
+function tabAlturaAgendar(){
+  if(_altRaf) return;
+  _altRaf=requestAnimationFrame(function(){ _altRaf=null; tabAltura(); });
+}
+window.addEventListener('scroll', tabAlturaAgendar, {passive:true});
+window.addEventListener('resize', tabAlturaAgendar);
+
 function largDe(grupo, id, padrao){
   var g=S.larg[grupo]||{};
   return g[id]!==undefined ? g[id] : padrao;
@@ -1944,6 +2193,7 @@ function csvBaixar(nome, linhas){
 }
 function cel(v){ return String(v===null||v===undefined?'':v).replace(/;/g,',').replace(/[\r\n]+/g,' '); }
 function celn(v,c){ return isFinite(v)? String(round(v,c===undefined?2:c)).replace('.',',') : ''; }
+
 /* ==========================================================================
    IMPORTAÇÃO
    A base Scanntech completa não cabe na memória linha a linha, então ela é
@@ -2362,6 +2612,7 @@ function ligarDrop(){
     e.preventDefault(); receberArquivos(e.dataTransfer.files);
   });
 }
+
 /* ==========================================================================
    TELA DE CLASSIFICAÇÃO
    A chave é sempre o CÓDIGO DE BARRAS. A classificação é sempre no SKU —
@@ -2369,6 +2620,64 @@ function ligarDrop(){
    (ex.: Marca ▸ SKU) porque marcas costumam se comportar parecido, mas o
    que vale é o que está gravado no SKU.
    ========================================================================== */
+
+
+/* ==========================================================================
+   COLUNAS DA LISTA (v1.5)
+   A tela precisava caber inteira num monitor de 21,5": fonte menor, células
+   apertadas e larguras mínimas. Cada coluna pode ser ocultada no menu
+   ☰ colunas e redimensionada arrastando a borda do cabeçalho — igual à
+   tabela do Mercado. As escolhas ficam em S.cls.ocultas e S.larg.cls.
+   ========================================================================== */
+var COLS_CLS=[
+  {k:'cod'  , t:'código'          , w:92 , cls:'l nowrap small'},
+  {k:'busca', t:'buscar'          , w:118, cls:'c'},
+  {k:'desc' , t:'descrição'       , w:196, cls:'l'},
+  {k:'mk'   , t:'marca'           , w:104, cls:'l'},
+  {k:'fab'  , t:'fabricante'      , w:104, cls:'l'},
+  {k:'cat'  , t:'categoria'       , w:108, cls:'l'},
+  {k:'sub'  , t:'subcat. ZL'      , w:108, cls:'l'},
+  {k:'sabor', t:'sabor / variação', w:108, cls:'l'},
+  {k:'pais' , t:'país'            , w:84 , cls:'l'},
+  {k:'emb'  , t:'embalagem'       , w:84 , cls:'l'},
+  {k:'conc' , t:'conc.'           , w:46 , cls:'c'},
+  {k:'vol'  , t:'volum. ml'       , w:66 , cls:''},
+  {k:'ru'   , t:'R$/und'          , w:66 , cls:'num'},
+  {k:'fat'  , t:'faturamento'     , w:82 , cls:'num'},
+  {k:'ok'   , t:'ok'              , w:40 , cls:'c'}
+];
+var COLS_CLS_FIM = {ru:1, fat:1, ok:1};   /* ficam fora do colspan do grupo */
+function clsColsVisiveis(){
+  var oc=S.cls.ocultas||{};
+  return COLS_CLS.filter(function(c){ return !oc[c.k]; });
+}
+function clsOcultar(k, mostrar){
+  S.cls.ocultas=S.cls.ocultas||{};
+  if(mostrar) delete S.cls.ocultas[k]; else S.cls.ocultas[k]=1;
+  redesenhar(renderTudo);
+}
+function abrirColunasCls(){
+  var oc=S.cls.ocultas||{};
+  var corpo='<div class="chips" style="gap:8px">'+COLS_CLS.map(function(c){
+    var vis=!oc[c.k];
+    return '<label class="chip'+(vis?' on':'')+'" style="cursor:pointer"><input type="checkbox" '+
+      (vis?'checked':'')+' style="width:auto;margin-right:6px" '+
+      'onchange="clsOcultar(\''+c.k+'\',this.checked)">'+esc(c.t)+'</label>';
+  }).join('')+'</div>'+
+  '<div class="flexr mt"><button class="btn sm" onclick="S.cls.ocultas={};redesenhar(renderTudo)">mostrar todas</button>'+
+  '<button class="btn sm" onclick="S.larg.cls={};redesenhar(renderTudo)">larguras automáticas</button>'+
+  '<button class="btn sm'+(S.cls.den?' on':'')+'" onclick="S.cls.den=!S.cls.den;redesenhar(renderTudo)">'+
+  (S.cls.den?'modo condensado: ligado':'modo condensado: desligado')+'</button>'+
+  '<span class="tag">arraste a borda direita de qualquer cabeçalho para mudar a largura</span></div>'+
+  '<div class="info small mt">A coluna <b>descrição</b> é a que mais ocupa espaço. Se a tela ainda '+
+  'não couber, esconda <b>faturamento</b> e <b>R$/und</b> — elas continuam valendo no recorte, '+
+  'só não aparecem aqui.</div>';
+  abrirModal('Colunas da lista de classificação', corpo);
+}
+function clsRz(id){
+  return '<i class="rz" onmousedown="colArrastar(event,\'cls\','+
+    JSON.stringify(String(id)).replace(/"/g,'&quot;')+')"></i>';
+}
 
 var CLS_DIMS = ['cat','sub','sabor','pais','emb','faixa','fab','mk','conc','corte','zl','ok'];
 
@@ -2411,6 +2720,59 @@ function clsDatalists(){
   }).join('');
   _dlSig=sig;
   return _dlCache;
+}
+
+/* ------------------------------------------------- sugestões em cascata --
+   Na subcategoria ZL só faz sentido oferecer o que já foi usado NAQUELA
+   categoria; no sabor / variação, o que já foi usado naquela categoria +
+   subcategoria. Quando o recorte fica vazio (uma subcategoria nova, por
+   exemplo) a lista abre no nível de cima, e só então na lista inteira —
+   nunca fica vazia. Vale só para esses dois campos.                        */
+var CASC={sub:{}, sabor:{}};
+function cascCalc(){
+  var sub={}, sabor={};
+  if(D.prod) for(var i=0;i<D.prod.length;i++){
+    var P=D.prod[i]; if(!P) continue;
+    var c=P.cat||'';
+    if(P.sub && P.sub.indexOf('(')!==0){ (sub[c]||(sub[c]={}))[P.sub]=1; }
+    if(P.sabor && P.sabor.indexOf('(')!==0){
+      var k=c+'\u0001'+(P.sub||'');
+      (sabor[k]||(sabor[k]={}))[P.sabor]=1;
+    }
+  }
+  CASC={sub:sub, sabor:sabor};
+}
+function ordPt(a,b){ return a.localeCompare(b,'pt'); }
+/* datalists criadas sob demanda durante a montagem da lista */
+var _dlDinMap={}, _dlDinN=0, _dlDinHtml=[];
+function dlDinReset(){ _dlDinMap={}; _dlDinN=0; _dlDinHtml=[]; }
+function dlDinHtml(){ return _dlDinHtml.join(''); }
+function dlDinId(chave, valores){
+  if(_dlDinMap[chave]) return _dlDinMap[chave];
+  var id='dld'+(++_dlDinN);
+  _dlDinMap[chave]=id;
+  _dlDinHtml.push('<datalist id="'+id+'">'+valores.map(function(v){
+    return '<option value="'+esc(v)+'">'; }).join('')+'</datalist>');
+  return id;
+}
+function dlSubDe(P){
+  var c=P.cat||'', m=CASC.sub[c];
+  var vs=m? Object.keys(m).sort(ordPt) : [];
+  if(!vs.length) return 'dl-sub';
+  return dlDinId('S\u0001'+c, vs);
+}
+function dlSaborDe(P){
+  var c=P.cat||'', s=P.sub||'';
+  var m=CASC.sabor[c+'\u0001'+s];
+  var vs=m? Object.keys(m).sort(ordPt) : [];
+  if(!vs.length && s){                       /* cai para a categoria inteira */
+    var agg={}, pre=c+'\u0001';
+    for(var k in CASC.sabor) if(k.indexOf(pre)===0)
+      for(var v in CASC.sabor[k]) agg[v]=1;
+    vs=Object.keys(agg).sort(ordPt);
+  }
+  if(!vs.length) return 'dl-sabor';
+  return dlDinId('B\u0001'+c+'\u0001'+s, vs);
 }
 
 /* --------------------------------------------------------------- edição -- */
@@ -2504,7 +2866,10 @@ function setCls(cb, campo, v){
   histReg([{cb:cb, campo:campo, antes:antes, antesEf:antesEf,
             depois:(campo==='vol'? (numd(val)>0?numd(val):undefined) : (val||undefined))}], rotulo);
   var d=DIM_DO_CAMPO[campo];
-  var pesado = S.tela!=='classif' || S.cls.so!=='todos' ||
+  /* categoria e subcategoria mudam as listas de sugestão das linhas vizinhas
+     — aí não dá para atualizar só a linha editada. */
+  var pesado = campo==='cat' || campo==='sub' ||
+               S.tela!=='classif' || S.cls.so!=='todos' ||
                d===S.cls.n1 || d===S.cls.n2 ||
                (GF.sel[d] && GF.sel[d].size) || GF.busca ||
                (GF.faixa.vol && (GF.faixa.vol.min!==''||GF.faixa.vol.max!=='')) ||
@@ -2618,57 +2983,12 @@ function gBuscar(q, modo, copiar){
 }
 function gFechar(){ if(_jan && !_jan.closed) _jan.close(); _jan=null; }
 
-/* painel embutido: ficha do código de barras (Open Food Facts, aberto e com CORS) */
-var _fichaCache={};
-function fichaCarregar(cb){
-  var alvo=h('imgbd'); if(!alvo) return;
-  if(_fichaCache[cb]){ fichaPintar(cb, _fichaCache[cb]); return; }
-  alvo.innerHTML='<div class="ph">consultando o código <b>'+esc(cb)+'</b>&hellip;</div>';
-  fetch('https://world.openfoodfacts.org/api/v0/product/'+encodeURIComponent(cb)+'.json')
-    .then(function(r){ return r.json(); })
-    .then(function(j){ _fichaCache[cb]=j; fichaPintar(cb,j); })
-    .catch(function(){
-      alvo.innerHTML='<div class="ph">não consegui consultar a ficha aqui (sem internet ou bloqueado).<br>'+
-        'Use o botão <b>G</b> para abrir a busca do Google na janela lateral.</div>';
-    });
-}
-function fichaPintar(cb, j){
-  var alvo=h('imgbd'); if(!alvo) return;
-  var P=prodDeCb(cb);
-  if(!j || j.status!==1 || !j.product){
-    alvo.innerHTML='<div class="ph">código <b>'+esc(cb)+'</b> não encontrado na base pública.<br>'+
-      'Abra a busca do Google com os botões <b>G</b> / <b>im</b> ao lado da linha.</div>';
-    return;
-  }
-  var p=j.product;
-  var imgs=[p.image_front_url, p.image_url, p.image_ingredients_url].filter(Boolean);
-  imgs=uniq(imgs).slice(0,3);
-  var nome=p.product_name || p.generic_name || '';
-  var marca=p.brands||'', qt=p.quantity||'';
-  var mlSug=0, m=String(qt).match(/([\d.,]+)\s*(ml|l|litro)/i);
-  if(m){ mlSug=numd(m[1])*(/^l/i.test(m[2])?1000:1); }
-  alvo.innerHTML=
-    imgs.map(function(u){ return '<img src="'+esc(u)+'" alt="">'; }).join('')+
-    '<div style="flex:1;min-width:190px;font-size:11.5px">'+
-      '<div class="b">'+esc(nome||'(sem nome)')+'</div>'+
-      (marca?'<div class="muted">marca: '+esc(marca)+'</div>':'')+
-      (qt?'<div class="muted">embalagem: '+esc(qt)+'</div>':'')+
-      '<div class="flexr mt">'+
-        (nome?'<button class="btn xs" onclick="setCls(\''+cb+'\',\'desc\','+JSON.stringify(nome).replace(/"/g,'&quot;')+')">usar este nome</button>':'')+
-        (marca?'<button class="btn xs" onclick="setCls(\''+cb+'\',\'mk\','+JSON.stringify(marca.split(',')[0]).replace(/"/g,'&quot;')+')">usar a marca</button>':'')+
-        (mlSug?'<button class="btn xs" onclick="setCls(\''+cb+'\',\'vol\','+mlSug+')">volumetria '+nf(mlSug)+' ml</button>':'')+
-      '</div>'+
-      '<div class="tag mt">fonte: base pública Open Food Facts &mdash; confira antes de usar</div>'+
-    '</div>';
-}
 function clsFoco(cb){
   S.cls.foco=cb;
   if(S.cls.auto){
     var P=prodDeCb(cb);
     gBuscar(cb+' '+(P?P.nome:''), 'img', false);
   }
-  fichaCarregar(cb);
-  var b=h('imgcb'); if(b) b.innerHTML=esc(cb);
 }
 
 /* ================================================================= TELA == */
@@ -2704,6 +3024,8 @@ function renderClassif(){
       '<button class="btn sm '+(S.cls.auto?'on':'')+'" onclick="S.cls.auto=!S.cls.auto;redesenhar(renderTudo)">'+
       (S.cls.auto?'ligada — abre a janela sozinha':'desligada')+'</button></div>'+
     '<div class="fb" style="min-width:auto"><label class="fl">&nbsp;</label>'+
+      '<button class="btn sm" onclick="abrirColunasCls()">&#9776; colunas'+
+        (Object.keys(S.cls.ocultas||{}).length?' ('+Object.keys(S.cls.ocultas).length+' ocultas)':'')+'</button> '+
       '<button class="btn sm" onclick="clsAbrirTudo(1)">expandir</button> '+
       '<button class="btn sm" onclick="clsAbrirTudo(0)">recolher</button> '+
       '<button class="btn sm'+(HIST.length?' d':'')+'" '+(HIST.length?'':'disabled ')+
@@ -2711,10 +3033,12 @@ function renderClassif(){
         (HIST.length?' ('+nf(HIST.length)+')':'')+'</button> '+
       '<button class="btn sm" onclick="gFechar()">fechar janela de busca</button> '+
       '<button class="btn sm" onclick="abrirRenomear(\'mk\',\'\')">renomear marca / fabricante</button> '+
+      '<button class="btn sm" onclick="abrirCriarCat(\'\')">criar categoria a partir de subcategoria</button> '+
       '<button class="btn sm p" onclick="exportarClsJson()">exportar .json</button> '+
       '<button class="btn sm" onclick="exportarClsCsv()">exportar .csv</button></div>'+
     '</div>';
 
+  cascCalc(); dlDinReset();
   var linhas=[], mostrados=0;
   plano.forEach(function(no){
     var dimNivel = (no.nivel===0? n1 : n2);
@@ -2732,25 +3056,21 @@ function renderClassif(){
     linhas.push(clsLinhaSku(no, P, raiz.fat));
   });
 
+  var cv=clsColsVisiveis();
+  var wRot=largDe('cls','__rot',252);
   var th='<tr>'+
-    '<th class="l" style="min-width:300px">'+esc(dim(n1)[1])+(n2?' &#9656; '+esc(dim(n2)[1]):'')+'</th>'+
-    '<th class="l" style="min-width:104px">código</th>'+
-    '<th class="c" style="min-width:132px">buscar</th>'+
-    '<th class="l" style="min-width:230px">descrição</th>'+
-    '<th class="l" style="min-width:120px">marca</th>'+
-    '<th class="l" style="min-width:120px">fabricante</th>'+
-    '<th class="l" style="min-width:120px">subcat. ZL</th>'+
-    '<th class="l" style="min-width:120px">sabor / variação</th>'+
-    '<th class="l" style="min-width:100px">país</th>'+
-    '<th class="l" style="min-width:95px">embalagem</th>'+
-    '<th style="min-width:52px">conc.</th>'+
-    '<th style="min-width:78px">volum. ml</th>'+
-    '<th style="min-width:80px">R$/und</th>'+
-    '<th style="min-width:92px">faturamento</th>'+
-    '<th style="min-width:46px">ok</th></tr>';
+    '<th class="l" data-col="__rot" style="width:'+wRot+'px;min-width:'+wRot+'px">'+
+      '<span class="chl">'+esc(dim(n1)[1])+(n2?' &#9656; '+esc(dim(n2)[1]):'')+'</span>'+clsRz('__rot')+'</th>'+
+    cv.map(function(c){
+      var w=largDe('cls', c.k, c.w);
+      return '<th class="'+(c.cls.indexOf('l')===0?'l ':(c.cls==='c'?'c ':''))+
+        '" data-col="'+c.k+'" style="width:'+w+'px;min-width:'+w+'px">'+
+        '<span class="chl">'+esc(c.t)+'</span>'+clsRz(c.k)+'</th>';
+    }).join('')+'</tr>';
 
   var lista=card('Lista de classificação &middot; '+nf(mostrados)+' SKUs na tela',
-    ctl+'<div class="tw h70 sticky1"><table class="t"><thead>'+th+'</thead><tbody>'+
+    ctl+'<div class="tw h70 sticky1"><table class="t cden'+(S.cls.den===false?'':' den')+
+    '" style="table-layout:fixed"><thead>'+th+'</thead><tbody>'+
     linhas.join('')+'</tbody></table></div>'+
     '<div class="info small">Setas &#8593; &#8595; andam entre as linhas e &#8592; &#8594; entre as colunas '+
     '(quando o cursor está na ponta do texto); <b>Enter</b> confirma e desce. '+
@@ -2760,17 +3080,7 @@ function renderClassif(){
       'A edição fica visivelmente mais lenta acima de mil linhas na tela.</div>':''),
     'a classificação vale no SKU &middot; use os botões <b>G</b> e <b>im</b> para pesquisar o produto', true);
 
-  var painel=card('Ficha do produto &middot; <span id="imgcb">'+esc(S.cls.foco||'—')+'</span>',
-    '<div id="imgpane"><div class="ih"><b>imagens e dados do código de barras</b>'+
-      '<span class="sp"></span>'+
-      '<button onclick="gBuscar(S.cls.foco,\'img\',false)">abrir imagens no Google</button>'+
-      '<button onclick="gBuscar(S.cls.foco,\'web\',false)">abrir busca web</button>'+
-      '<button onclick="fichaCarregar(S.cls.foco)">recarregar</button></div>'+
-      '<div class="ib" id="imgbd"><div class="ph">clique em uma linha da lista para ver a ficha do produto</div></div></div>',
-    'painel embutido &middot; o Google não permite ser embutido, por isso a busca completa abre na janela lateral');
-
-  h('tela').innerHTML = clsDatalists() + lista + painel + clsHistorico() + clsCobertura();
-  if(S.cls.foco) fichaCarregar(S.cls.foco);
+  h('tela').innerHTML = clsDatalists() + dlDinHtml() + lista + clsCobertura() + clsHistorico();
 }
 function clsAbrirTudo(on){
   S.cls.fech={};
@@ -2805,14 +3115,22 @@ function clsLinhaGrupo(no, tot, dimNivel){
     ? ' <button class="gbtn" title="renomear em todos os SKUs deste grupo" onclick="event.stopPropagation();'+
       'abrirRenomear(\''+dimNivel+'\','+JSON.stringify(String(no.k)).replace(/"/g,'&quot;')+')">renomear</button>'
     : '';
+  var cv=clsColsVisiveis();
+  var meio=cv.filter(function(c){ return !COLS_CLS_FIM[c.k]; }).length;
+  var fim='';
+  cv.forEach(function(c){
+    if(!COLS_CLS_FIM[c.k]) return;
+    if(c.k==='ru')  fim+='<td class="num">'+(isFinite(m.ru)?nf(m.ru,2):'—')+'</td>';
+    if(c.k==='fat') fim+='<td class="num b">'+mmr(m.fat)+'</td>';
+    if(c.k==='ok')  fim+='<td class="c">'+(nT? pc(nOk/nT,0):'—')+'</td>';
+  });
   return arvTr(no)+arvCelula(no,'clsTog', mistura+ren)+
-    '<td class="l muted small" colspan="11">'+nf(nT)+' SKU(s) &middot; '+nf(nOk)+' completo(s)</td>'+
-    '<td class="num">'+(isFinite(m.ru)?nf(m.ru,2):'—')+'</td>'+
-    '<td class="num b">'+mmr(m.fat)+'</td>'+
-    '<td class="c">'+(nT? pc(nOk/nT,0):'—')+'</td></tr>';
+    (meio? '<td class="l muted small" colspan="'+meio+'">'+nf(nT)+' SKU(s) &middot; '+nf(nOk)+' completo(s)</td>' : '')+
+    fim+'</tr>';
 }
+/* dl = id COMPLETO da datalist ('dl-mk', 'dld7'…) ou '' para campo livre */
 function inpCls(cb, campo, valor, dl, cls, titulo){
-  return '<input type="text" class="clsi'+(cls||'')+'" list="'+(dl?'dl-'+dl:'')+'" data-k="cls-'+cb+'-'+campo+
+  return '<input type="text" class="clsi'+(cls||'')+'" list="'+(dl||'')+'" data-k="cls-'+cb+'-'+campo+
     '"'+(titulo?' title="'+esc(titulo)+'"':'')+
     ' value="'+esc(valor||'')+'" onchange="setCls(\''+cb+'\',\''+campo+'\',this.value)">';
 }
@@ -2825,41 +3143,54 @@ function descOriginal(cb){
   if(!DESCOV[cb]) return orig ? 'veio assim da base' : '';
   return orig ? 'original: '+orig+'  (Ctrl+Z desfaz)' : 'sem nome na base  (Ctrl+Z desfaz)';
 }
-function clsLinhaSku(no, P, tot){
-  var m=met(no);
-  var foco = S.cls.foco===P.cb;
-  return '<tr data-cb="'+esc(P.cb)+'"'+(foco?' style="outline:2px solid var(--az);outline-offset:-2px"':'')+
-    ' onclick="clsFoco(\''+P.cb+'\')">'+
-    '<td class="l agl'+(no.nivel?' agn'+no.nivel:'')+'"><span class="tri"></span> '+esc(P.nome).substring(0,90)+
-      (P.zl?' <span class="pill az">ZL</span>':'')+'</td>'+
-    '<td class="l nowrap small">'+esc(P.cb)+'</td>'+
-    '<td class="c"><div class="gbtns">'+
+/* conteúdo de cada coluna da linha de SKU */
+function clsCelula(k, P, m){
+  switch(k){
+    case 'cod':   return '<td class="l nowrap small">'+esc(P.cb)+'</td>';
+    case 'busca': return '<td class="c"><div class="gbtns">'+
       '<button class="gbtn" title="copiar o código de barras" onclick="event.stopPropagation();gCopiar(\''+P.cb+'\')">&#10697;</button>'+
       '<button class="gbtn" title="copiar o código e pesquisar no Google" onclick="event.stopPropagation();gBuscar(\''+P.cb+'\',\'web\',true)">G&nbsp;cód</button>'+
       '<button class="gbtn" title="copiar a descrição e pesquisar no Google" onclick="event.stopPropagation();gBuscar('+
         JSON.stringify(P.nome).replace(/"/g,'&quot;')+',\'web\',true)">G&nbsp;desc</button>'+
       '<button class="gbtn" title="imagens do produto no Google" onclick="event.stopPropagation();gBuscar('+
         JSON.stringify(P.nome+' '+P.cb).replace(/"/g,'&quot;')+',\'img\',false)">im</button>'+
-      '</div></td>'+
-    '<td class="l">'+inpCls(P.cb,'desc',P.nome,'', '', descOriginal(P.cb))+'</td>'+
-    '<td class="l">'+inpCls(P.cb,'mk',P.mk,'mk')+'</td>'+
-    '<td class="l">'+inpCls(P.cb,'fab',P.fab,'fab',P.zl?' ed':'')+'</td>'+
-    '<td class="l">'+inpCls(P.cb,'sub',P.sub,'sub',P.sub?' ed':'')+'</td>'+
-    '<td class="l">'+inpCls(P.cb,'sabor',P.sabor,'sabor',P.sabor?' ed':'')+'</td>'+
-    '<td class="l">'+inpCls(P.cb,'pais',P.pais,'pais',P.pais?' ed':'')+'</td>'+
-    '<td class="l">'+inpCls(P.cb,'emb',P.emb,'emb',P.emb?' ed':'')+'</td>'+
-    '<td class="c"><select onchange="setCls(\''+P.cb+'\',\'conc\',this.value)" onclick="event.stopPropagation()">'+
+      '</div></td>';
+    case 'desc':  return '<td class="l">'+inpCls(P.cb,'desc',P.nome,'', '', descOriginal(P.cb))+'</td>';
+    case 'mk':    return '<td class="l">'+inpCls(P.cb,'mk',P.mk,'dl-mk')+'</td>';
+    case 'fab':   return '<td class="l">'+inpCls(P.cb,'fab',P.fab,'dl-fab',P.zl?' ed':'')+'</td>';
+    case 'cat':   return '<td class="l">'+inpCls(P.cb,'cat',P.cat,'dl-cat',
+                    (P.cat && P.cat.indexOf('(')!==0)?' ed':'',
+                    'a categoria vale para este SKU — muda também as sugestões de subcategoria e sabor')+'</td>';
+    case 'sub':   return '<td class="l">'+inpCls(P.cb,'sub',P.sub,dlSubDe(P),P.sub?' ed':'',
+                    'sugestões: subcategorias já usadas em '+(P.cat||'—'))+'</td>';
+    case 'sabor': return '<td class="l">'+inpCls(P.cb,'sabor',P.sabor,dlSaborDe(P),P.sabor?' ed':'',
+                    'sugestões: sabores já usados em '+(P.cat||'—')+(P.sub?' / '+P.sub:''))+'</td>';
+    case 'pais':  return '<td class="l">'+inpCls(P.cb,'pais',P.pais,'dl-pais',P.pais?' ed':'')+'</td>';
+    case 'emb':   return '<td class="l">'+inpCls(P.cb,'emb',P.emb,'dl-emb',P.emb?' ed':'')+'</td>';
+    case 'conc':  return '<td class="c"><select onchange="setCls(\''+P.cb+'\',\'conc\',this.value)" onclick="event.stopPropagation()">'+
       ['','S','N'].map(function(v){ return '<option value="'+v+'"'+(P.conc===v?' selected':'')+'>'+(v||'—')+'</option>'; }).join('')+
-      '</select></td>'+
-    '<td><input type="number" step="1" data-k="vol-'+P.cb+'" value="'+(P.volMan?round(P.vol,0):'')+
+      '</select></td>';
+    case 'vol':   return '<td><input type="number" step="1" data-k="vol-'+P.cb+'" value="'+(P.volMan?round(P.vol,0):'')+
       '" placeholder="'+nf(D.volBase[P.i],0)+'" title="em branco = usa o que vem da base ('+nf(D.volBase[P.i],1)+
       ' ml/und)" onclick="event.stopPropagation()" onchange="setCls(\''+P.cb+'\',\'vol\',this.value)"'+
-      (P.volMan?' class="ed"':'')+'></td>'+
-    '<td class="num" data-c="ru">'+(isFinite(m.ru)?nf(m.ru,2):'—')+'</td>'+
-    '<td class="num">'+mmr(m.fat)+'</td>'+
-    '<td class="c" data-c="ok">'+(P.ok?'<span class="pill ok">ok</span>':
+      (P.volMan?' class="ed"':'')+'></td>';
+    case 'ru':    return '<td class="num" data-c="ru">'+(isFinite(m.ru)?nf(m.ru,2):'—')+'</td>';
+    case 'fat':   return '<td class="num">'+mmr(m.fat)+'</td>';
+    case 'ok':    return '<td class="c" data-c="ok">'+(P.ok?'<span class="pill ok">ok</span>':
       '<button class="gbtn" title="preencher com a sugestão do nome (palpite)" onclick="event.stopPropagation();clsAplicarSug(\''+P.cb+'\')">sug</button>')+
-    '</td></tr>';
+      '</td>';
+  }
+  return '<td></td>';
+}
+function clsLinhaSku(no, P, tot){
+  var m=met(no);
+  var foco = S.cls.foco===P.cb;
+  return '<tr data-cb="'+esc(P.cb)+'"'+(foco?' style="outline:2px solid var(--az);outline-offset:-2px"':'')+
+    ' onclick="clsFoco(\''+P.cb+'\')">'+
+    '<td class="l agl'+(no.nivel?' agn'+no.nivel:'')+'" title="'+esc(P.nome)+'"><span class="tri"></span> '+
+      esc(P.nome).substring(0,90)+(P.zl?' <span class="pill az">ZL</span>':'')+'</td>'+
+    clsColsVisiveis().map(function(c){ return clsCelula(c.k, P, m); }).join('')+
+    '</tr>';
 }
 
 /* ------------------------------------------------------------- cobertura */
@@ -2932,7 +3263,8 @@ function exportarClsCsv(){
 }
 function exportarClsJson(){
   var o={tipo:'scanntech-classificacao', versao:VERSAO, em:new Date().toISOString(),
-         cls:CLS, vol:VOLOV, desc:DESCOV, uni:UNI};
+         cls:CLS, vol:VOLOV, desc:DESCOV, uni:UNI,
+         errok:Object.keys(ERROK), cenas:CENAS, cenaIni:CENA_INI};
   baixar('Scanntech_classificacao_'+carimbo()+'.json',
     new Blob([JSON.stringify(o)], {type:'application/json'}));
   toast('classificações exportadas');
@@ -3020,6 +3352,102 @@ function renomearExec(campo){
   fecharModal();
   redesenhar(renderTudo);
   toast(nf(ix.length)+' SKU(s) renomeados para <b>'+esc(para)+'</b>.');
+}
+
+/* ==========================================================================
+   CRIAR CATEGORIA A PARTIR DE UMA SUBCATEGORIA
+   Continua sendo classificação SKU a SKU — o que a janela faz é escrever a
+   mesma categoria nos SKUs que hoje carregam aquela subcategoria, de uma vez
+   e com um único desfazer. Serve para quando uma subcategoria cresceu a ponto
+   de merecer categoria própria (ÁGUA DE COCO saindo de SUCO, por exemplo).
+   ========================================================================== */
+function subsResumo(){
+  var m={};
+  for(var i=0;i<DB.skus.length;i++){
+    if(D.rep[i]!==i) continue;
+    var P=D.prod[i]; if(!P.sub) continue;
+    var o=m[P.sub]||(m[P.sub]={n:0, fat:0, cats:{}});
+    o.n++; o.fat+=(D.fatTot[i]||0);
+    o.cats[P.cat||'—']=1;
+  }
+  return m;
+}
+function abrirCriarCat(sub){
+  var R=subsResumo();
+  var ks=Object.keys(R).sort(function(a,b){ return R[b].fat-R[a].fat; });
+  if(!ks.length){
+    abrirModal('Criar categoria a partir de subcategoria',
+      '<div class="warn small">Nenhum SKU tem subcategoria preenchida ainda. '+
+      'Classifique a subcategoria de alguns SKUs primeiro.</div>', 'g');
+    return;
+  }
+  var corpo=
+    '<div class="fbar">'+
+      '<div class="fb wide"><label class="fl">Subcategoria que vira categoria</label>'+
+        '<select id="ccSub" onchange="criarCatPreview()">'+
+          '<option value="">— escolha —</option>'+
+          ks.map(function(k){
+            return '<option value="'+esc(k)+'"'+(sub===k?' selected':'')+'>'+esc(k)+
+              '  ('+nf(R[k].n)+' SKUs &middot; '+mmr(R[k].fat)+')</option>';
+          }).join('')+
+        '</select><div class="tag">ordenada por faturamento</div></div>'+
+      '<div class="fb wide"><label class="fl">Nome da categoria nova</label>'+
+        '<input type="text" id="ccNome" list="dl-cat" placeholder="vai para MAIÚSCULAS" '+
+        'oninput="criarCatPreview()"></div>'+
+      '<div class="fb" style="min-width:auto"><label class="fl">&nbsp;</label>'+
+        '<button class="btn p" onclick="criarCatExec()">criar categoria</button></div>'+
+    '</div>'+
+    clsDatalists()+
+    '<div id="ccPrev" class="mt"></div>'+
+    '<div class="info small mt">Muda só a <b>categoria</b> dos SKUs que hoje estão nessa subcategoria. '+
+    'A subcategoria, o sabor, o país e a embalagem continuam como estão, e tudo entra no histórico '+
+    'como <b>uma</b> alteração — o desfazer devolve todos de uma vez.</div>';
+  abrirModal('Criar categoria a partir de subcategoria', corpo, 'g');
+  setTimeout(criarCatPreview, 30);
+}
+function criarCatPreview(){
+  var el=h('ccPrev'); if(!el) return;
+  var sub=h('ccSub')?up(h('ccSub').value):'', nome=h('ccNome')?up(h('ccNome').value):'';
+  if(!sub){ el.innerHTML='<div class="tag">escolha a subcategoria</div>'; return; }
+  var ix=skusComValor('sub', sub);
+  if(!ix.length){ el.innerHTML='<div class="warn small">Nenhum SKU com <b>'+esc(sub)+'</b>.</div>'; return; }
+  var fat=sum(ix, function(i){ return D.fatTot[i]||0; });
+  var de={};
+  ix.forEach(function(i){ var c=D.prod[i].cat||'—'; de[c]=(de[c]||0)+(D.fatTot[i]||0); });
+  var deKs=Object.keys(de).sort(function(a,b){ return de[b]-de[a]; });
+  el.innerHTML='<div class="okb small"><b>'+nf(ix.length)+' SKU(s)</b> &middot; '+mmr(fat)+
+    ' passam para a categoria <b>'+(esc(nome)||'(digite o nome)')+'</b>.'+
+    '<br>Hoje estão em: '+deKs.map(function(c){ return esc(c)+' ('+mmr(de[c])+')'; }).join(' &middot; ')+
+    '</div>'+
+    '<div class="tw h40"><table class="t"><thead><tr><th class="l">SKU</th><th class="l">Código</th>'+
+    '<th class="l">Categoria hoje</th><th>Faturamento</th></tr></thead><tbody>'+
+    ix.slice().sort(function(a,b){ return (D.fatTot[b]||0)-(D.fatTot[a]||0); }).slice(0,40).map(function(i){
+      return '<tr><td class="l">'+esc(D.prod[i].nome)+'</td><td class="l">'+esc(D.prod[i].cb)+'</td>'+
+        '<td class="l">'+esc(D.prod[i].cat||'—')+'</td>'+
+        '<td class="num">'+mmr(D.fatTot[i]||0)+'</td></tr>';
+    }).join('')+'</tbody></table></div>'+
+    (ix.length>40?'<div class="tag">mostrando 40 de '+nf(ix.length)+'</div>':'');
+}
+function criarCatExec(){
+  var sub=h('ccSub')?up(h('ccSub').value):'', nome=h('ccNome')?up(h('ccNome').value):'';
+  if(!sub){ toast('Escolha a subcategoria.'); return; }
+  if(!nome){ toast('Dê um nome para a categoria nova.'); return; }
+  var ix=skusComValor('sub', sub);
+  if(!ix.length){ toast('Nenhum SKU com essa subcategoria.'); return; }
+  var itens=[];
+  ix.forEach(function(i){
+    var cb=D.prod[i].cb;
+    if(D.prod[i].cat===nome) return;
+    itens.push({cb:cb, campo:'cat', antes:valorCru(cb,'cat'), antesEf:valorEfetivo(cb,'cat'), depois:nome});
+    aplicarCru(cb, 'cat', nome);
+  });
+  if(!itens.length){ toast('Esses SKUs já estão em <b>'+esc(nome)+'</b>.'); return; }
+  histReg(itens, 'categoria '+nome+' criada a partir da subcategoria '+sub+
+    ' ('+nf(itens.length)+' SKU'+(itens.length>1?'s':'')+')');
+  reindex();
+  fecharModal();
+  redesenhar(renderTudo);
+  toast(nf(itens.length)+' SKU(s) agora estão na categoria <b>'+esc(nome)+'</b>.');
 }
 
 /* ==========================================================================
@@ -3127,6 +3555,7 @@ function clsHistorico(){
     '<span class="tag">o histórico vale para esta sessão e <b>não</b> vai no .json — exporte antes de fechar</span></div>',
     'Ctrl+Z desfaz a última &middot; uniões têm o desfazer próprio na aba Uniões de SKU', true, 'lt');
 }
+
 /* ==========================================================================
    ABA MERCADO — KPIs, tabela principal (3 níveis), pivô e, por último, o mapa
    ========================================================================== */
@@ -3265,7 +3694,10 @@ function tabelaMercado(){
         '" style="width:'+w+'px;min-width:'+w+'px" onclick="mercOrdenar(\''+c.k+'\')" '+
         'title="clique para ordenar por esta coluna">'+
         '<span class="chl">'+esc(c.t)+(ord.k===c.k?(ord.d<0?' &#9662;':' &#9652;'):'')+'</span>'+rz(c.k)+'</th>';
-    }).join('')+'<th style="width:42px;min-width:42px"></th></tr>';
+    }).join('')+
+    (function(){ var w=largDe('merc','__acao',42);
+      return '<th data-col="__acao" style="width:'+w+'px;min-width:'+w+'px">'+rz('__acao')+'</th>'; })()+
+    '</tr>';
 
   var body=plano.map(function(no){
     return arvTr(no)+
@@ -3303,12 +3735,13 @@ function tabelaMercado(){
       '<button class="btn sm" onclick="S.merc.fech={};redesenhar(renderTudo)">expandir tudo</button> '+
       '<button class="btn sm" onclick="mercRecolher()">recolher</button> '+
       '<button class="btn sm" onclick="exportarMercado()">exportar (.csv)</button></div>'+
+    ltabCtl('merc')+
     '</div>';
   var corte = gs[0].cortado
     ? '<div class="info small">A dimensão tem '+nf(gs[0].cortado)+' valores; a tabela mostra os maiores do recorte.</div>' : '';
   return card('Mercado &middot; '+esc(niveis.map(function(d){return dim(d)[1];}).join(' ▸ ')),
-    ctl+corte+'<div class="tw h70 sticky1"><table class="t"><thead>'+th+'</thead><tbody>'+
-    body+totLinha+'</tbody></table></div>',
+    ctl+corte+'<div class="tw h70 hfit sticky1"><table class="t'+ltabCls('merc')+'"'+ltabStyle('merc')+'><thead>'+th+'</thead><tbody>'+
+    body+'</tbody><tfoot>'+totLinha+'</tfoot></table></div>',
     'clique no cabeçalho para ordenar', true);
 }
 function setMercDim(n,v){
@@ -3364,33 +3797,79 @@ function mapaUF(){
   var tot=ag.tot.fat;
   var svg=mapaBrasilSVG(ag, mt, GF.sel.uf);
 
-  /* tabela ao lado */
-  var linhas, totM=met(ag.tot);
+  /* tabela ao lado — todas as métricas, com a escolhida em destaque e como
+     critério de ordenação (v1.4) */
+  var COLS_MAPA=[
+    ['fat','Faturamento', function(m){ return m.fat; }, function(v){ return mmr(v); }],
+    ['sh' ,'Share'      , null, null],
+    ['lt' ,'Litros'     , function(m){ return m.lt; },  function(v){ return mm(v); }],
+    ['un' ,'Unidades'   , function(m){ return m.un; },  function(v){ return mm(v); }],
+    ['rl' ,'R$/L'       , function(m){ return m.rl; },  function(v){ return isFinite(v)?nf(v,2):'—'; }],
+    ['ru' ,'R$/un'      , function(m){ return m.ru; },  function(v){ return isFinite(v)?nf(v,2):'—'; }],
+    ['dn' ,'DN Num.'    , function(m){ return m.dn; },  function(v){ return pc(v,2); }],
+    ['dp' ,'DP Pond.'   , function(m){ return m.dp; },  function(v){ return pc(v,2); }]
+  ];
+  var mSel=S.merc.mapMet;
+  /* o share acompanha a métrica quando ela é somável; nas de preço, fica o
+     share do faturamento (share de R$/litro não quer dizer nada) */
+  var shDe = (mSel==='fat'||mSel==='lt'||mSel==='un') ? mSel : 'fat';
+  var shNome = 'Share ('+({fat:'faturamento',lt:'litros',un:'unidades'}[shDe])+')';
+  function totShare(){
+    var t=met(ag.tot);
+    return shDe==='fat'? t.fat : (shDe==='lt'? t.lt : t.un);
+  }
+  var tShare=totShare();
+  function valShare(m){ var v = shDe==='fat'? m.fat : (shDe==='lt'? m.lt : m.un);
+                        return tShare>0? v/tShare : 0; }
+
+  function linhaMapa(rot, reg, a, clicavel, g){
+    var m=met(a);
+    return '<tr'+(clicavel && GF.sel.uf && GF.sel.uf.has(g)?' class="selrow"':'')+
+      (clicavel?' style="cursor:pointer" onclick="mapClick('+JSON.stringify(g).replace(/"/g,'&quot;')+')"':'')+
+      '><td class="l b">'+esc(rot)+'</td>'+
+      '<td class="l muted small">'+esc(reg)+'</td>'+
+      COLS_MAPA.map(function(c){
+        var dest = (c[0]===mSel) ? ' mdest' : '';
+        if(c[0]==='sh') return '<td class="num'+dest+'">'+pc(valShare(m),2)+'</td>';
+        return '<td class="num'+dest+'">'+c[3](c[2](m))+'</td>';
+      }).join('')+'</tr>';
+  }
+  function chaveOrd(a){
+    var m=met(a);
+    if(mSel==='fat') return m.fat;
+    if(mSel==='lt') return m.lt;
+    if(mSel==='un') return m.un;
+    if(mSel==='rl') return isFinite(m.rl)?m.rl:-Infinity;
+    if(mSel==='ru') return isFinite(m.ru)?m.ru:-Infinity;
+    if(mSel==='dn') return isFinite(m.dn)?m.dn:-Infinity;
+    if(mSel==='dp') return isFinite(m.dp)?m.dp:-Infinity;
+    return m.fat;
+  }
+  var linhas;
   if(porRegiao){
     var reg={};
     ag.ordem.forEach(function(g){
       var r=regiaoDe(g), a=reg[r]||(reg[r]=novoAc());
       acSoma(a, ag.mapa[g]);
     });
-    linhas=Object.keys(reg).sort(function(a,b){ return reg[b].fat-reg[a].fat; }).map(function(r){
-      var m=met(reg[r]);
-      return '<tr><td class="l b" colspan="2">'+esc(r)+'</td>'+
-        '<td class="num">'+mmr(m.fat)+'</td><td class="num">'+pc(tot>0?m.fat/tot:0,2)+'</td>'+
-        '<td class="num">'+(isFinite(m.rl)?nf(m.rl,2):'—')+'</td>'+
-        '<td class="num">'+(isFinite(m.ru)?nf(m.ru,2):'—')+'</td></tr>';
-    }).join('');
+    linhas=Object.keys(reg).sort(function(a,b){ return chaveOrd(reg[b])-chaveOrd(reg[a]); })
+      .map(function(r){ return linhaMapa(r, '', reg[r], false, r); }).join('');
   }else{
-    linhas=ag.ordem.slice().sort(function(a,b){ return ag.mapa[b].fat-ag.mapa[a].fat; }).map(function(g){
-      var m=met(ag.mapa[g]);
-      var sel=GF.sel.uf && GF.sel.uf.has(g);
-      return '<tr'+(sel?' class="selrow"':'')+' style="cursor:pointer" onclick="mapClick('+
-        JSON.stringify(g).replace(/"/g,'&quot;')+')"><td class="l b">'+esc(g)+'</td>'+
-        '<td class="l muted small">'+esc(regiaoDe(g))+'</td>'+
-        '<td class="num">'+mmr(m.fat)+'</td><td class="num">'+pc(tot>0?m.fat/tot:0,2)+'</td>'+
-        '<td class="num">'+(isFinite(m.rl)?nf(m.rl,2):'—')+'</td>'+
-        '<td class="num">'+(isFinite(m.ru)?nf(m.ru,2):'—')+'</td></tr>';
-    }).join('');
+    linhas=ag.ordem.slice().sort(function(a,b){ return chaveOrd(ag.mapa[b])-chaveOrd(ag.mapa[a]); })
+      .map(function(g){ return linhaMapa(g, regiaoDe(g), ag.mapa[g], true, g); }).join('');
   }
+  var totM=met(ag.tot);
+  var thMapa='<tr><th class="l">'+(porRegiao?'REGIÃO':'UF')+'</th><th class="l">'+(porRegiao?'':'REGIÃO')+'</th>'+
+    COLS_MAPA.map(function(c){
+      return '<th class="'+(c[0]===mSel?'mdest':'')+'">'+esc(c[0]==='sh'? shNome : c[1])+'</th>';
+    }).join('')+'</tr>';
+  var totMapa='<tr class="tot"><td class="l">TOTAL</td><td></td>'+
+    COLS_MAPA.map(function(c){
+      var dest=(c[0]===mSel)?' mdest':'';
+      if(c[0]==='sh') return '<td class="num'+dest+'">100,00%</td>';
+      return '<td class="num'+dest+'">'+c[3](c[2](totM))+'</td>';
+    }).join('')+'</tr>';
+
   var seg='<div class="seg">'+MAP_METS.map(function(m){
     return '<button class="'+(S.merc.mapMet===m[0]?'on':'')+'" onclick="S.merc.mapMet=\''+m[0]+
       '\';redesenhar(renderTudo)">'+esc(m[1])+'</button>'; }).join('')+'</div>';
@@ -3399,16 +3878,11 @@ function mapaUF(){
       '<div class="fb" style="min-width:auto"><label class="fl">Tabela ao lado</label><div class="seg">'+
       '<button class="'+(!porRegiao?'on':'')+'" onclick="S.merc.mapAgr=\'uf\';redesenhar(renderTudo)">por UF</button>'+
       '<button class="'+(porRegiao?'on':'')+'" onclick="S.merc.mapAgr=\'reg\';redesenhar(renderTudo)">por região</button>'+
-      '</div></div></div>'+
-    '<div class="row" style="padding:var(--pd)"><div class="col" style="flex:1.45">'+svg+
+      '</div></div>'+ltabCtl('mapa')+'</div>'+
+    '<div class="row" style="padding:var(--pd)"><div class="col" style="flex:1.2">'+svg+
       '<div class="mapleg"><span>menor</span><span class="gr"></span><span>maior</span></div></div>'+
-    '<div class="col"><div class="tw h60"><table class="t"><thead><tr>'+
-      '<th class="l">UF</th><th class="l">Região</th><th>Faturamento</th><th>Share</th>'+
-      '<th>R$/L</th><th>R$/un</th></tr></thead><tbody>'+linhas+
-      '<tr class="tot"><td class="l">TOTAL</td><td></td><td class="num">'+mmr(totM.fat)+'</td>'+
-      '<td class="num">100,00%</td><td class="num">'+(isFinite(totM.rl)?nf(totM.rl,2):'—')+'</td>'+
-      '<td class="num">'+(isFinite(totM.ru)?nf(totM.ru,2):'—')+'</td></tr>'+
-      '</tbody></table></div></div></div>',
+    '<div class="col"><div class="tw h60"><table class="t'+ltabCls('mapa')+'"'+ltabStyle('mapa')+'>'+
+      '<thead>'+thMapa+'</thead><tbody>'+linhas+'</tbody><tfoot>'+totMapa+'</tfoot></table></div></div></div>',
     'malha: @svg-maps/brazil &middot; CC BY 4.0 &middot; clique num estado para filtrar', true);
 }
 function mapClick(g){
@@ -3482,6 +3956,7 @@ function pivoHTML(){
         '</div></div>'+
       '<div class="fb" style="min-width:auto"><label class="fl">&nbsp;</label>'+
         '<button class="btn sm" onclick="S.larg.pivo={};redesenhar(renderTudo)">larguras automáticas</button></div>'+
+      ltabCtl('pivo')+
     '</div>';
 
   function rz(id){
@@ -3527,8 +4002,8 @@ function pivoHTML(){
       ' colunas — recolha um nível ou aperte o filtro para ver o resto.</div>' : '';
   return card('Pivô do mercado &middot; '+esc(niveis.map(function(d){return dim(d)[1];}).join(' ▸ '))+
     ' &times; '+esc(dc[1])+' &middot; '+esc(mt[1]),
-    ctl+aviso+'<div class="tw sticky1 stickyT" style="max-height:88vh"><table class="t hm">'+
-    '<thead>'+th+'</thead><tbody>'+body+'</tbody></table></div>',
+    ctl+aviso+'<div class="tw sticky1 stickyT" style="max-height:88vh"><table class="t hm'+ltabCls('pivo')+'"'+
+    ltabStyle('pivo')+'><thead>'+th+'</thead><tbody>'+body+'</tbody></table></div>',
     'vermelho = menor &middot; verde = maior', true);
 }
 function colEhProd(d){ return ['mk','sku','fab','cb'].indexOf(d)>=0; }
@@ -3565,6 +4040,7 @@ function pivoExportar(){
 function renderMercado(){
   h('tela').innerHTML = kpisTopo() + tabelaMercado() + pivoHTML() + mapaUF();
 }
+
 /* ==========================================================================
    ABAS DE ANÁLISE — Evolução mensal, Pricing, Ranking, Share e Distribuição
    Todas usam o MESMO filtro do topo.
@@ -3626,7 +4102,7 @@ function renderEvolucao(){
       '<td class="num">'+(isFinite(m.ru)?nf(m.ru,2):'—')+'</td></tr>';
   }).join('');
   var mtot=met(raiz);
-  var tabela='<div class="tw h70 sticky1"><table class="t"><thead><tr>'+
+  var tabela='<div class="tw h70 sticky1"><table class="t'+ltabCls('evo')+'"'+ltabStyle('evo')+'><thead><tr>'+
     '<th class="l" style="min-width:150px">'+esc(niveis.map(function(d){return dim(d)[1];}).join(' ▸ '))+'</th>'+
     '<th style="min-width:86px">FATURAMENTO</th><th style="min-width:70px">LITROS</th>'+
     '<th style="min-width:62px">R$/L</th><th style="min-width:66px">R$/UND</th></tr></thead><tbody>'+
@@ -3699,10 +4175,18 @@ function renderEvolucao(){
       '<button class="'+(S.evo.tipo==='linha'?'on':'')+'" onclick="S.evo.tipo=\'linha\';redesenhar(renderTudo)">linha</button>'+
       '<button class="'+(S.evo.tipo==='col'?'on':'')+'" onclick="S.evo.tipo=\'col\';redesenhar(renderTudo)">coluna</button>'+
       '</div></div>'+
+    '<div class="fb" style="min-width:auto"><label class="fl">Eixo do tempo</label><div class="seg">'+
+      [['auto','automático'],['ano','jan–dez (linha por ano)'],['cont','contínuo (mês a mês)']].map(function(x){
+        return '<button class="'+(S.evo.eixoX===x[0]?'on':'')+'"'+(S.evo.serie?' disabled':'')+
+          ' onclick="S.evo.eixoX=\''+x[0]+'\';redesenhar(renderTudo)">'+x[1]+'</button>';
+      }).join('')+'</div>'+
+      (S.evo.serie?'<div class="tag">com as linhas separadas, só o contínuo faz sentido</div>':'')+
+      '</div>'+
     '<div class="fb" style="min-width:auto"><label class="fl">&nbsp;</label>'+
       '<button class="btn sm" onclick="S.evo.fech={};redesenhar(renderTudo)">expandir</button> '+
       '<button class="btn sm" onclick="evoRecolher()">recolher</button> '+
       '<button class="btn sm" onclick="exportarEvo()">exportar (.csv)</button></div>'+
+    ltabCtl('evo')+
     '</div>';
 
   h('tela').innerHTML =
@@ -3737,7 +4221,10 @@ function evoEixo(id, qual, v){
 function evoCard(no, id, nomeAlvo, linhas){
   var mt=metrica(id);
   var ex=(S.evo.eixo||{})[id]||{};
-  var porAno = EVO_POR_ANO.indexOf(id)>=0 && !linhas;
+  /* automático = volume em jan–dez, preço contínuo; os outros dois forçam */
+  var porAno = linhas ? false
+             : (S.evo.eixoX==='ano' ? true
+             : (S.evo.eixoX==='cont' ? false : EVO_POR_ANO.indexOf(id)>=0));
   var corpo = linhas ? graficoSeries(linhas, mt, ex)
             : (porAno ? graficoAnos(no, mt, ex) : graficoContinuo(no, mt, ex));
   var ctl='<div class="fbar" style="padding:5px var(--pd)">'+
@@ -4278,17 +4765,17 @@ function renderRanking(){
   var corpo=plano.map(function(no){
     var v=valores(no);
     return arvTr(no)+
-      '<td class="c b">'+(no.posA||'—')+'º</td>'+
-      '<td class="c muted">'+(no.posB||'—')+'º'+seta(no)+'</td>'+
+      '<td class="c muted">'+(no.posB||'—')+'º</td>'+
+      '<td class="c b">'+(no.posA||'—')+'º'+seta(no)+'</td>'+
       arvCelula(no,'rankTog', no.zl?' <span class="zlmk">&middot; ZL</span>':'')+
-      '<td class="num b">'+mt[3](v.va)+'</td>'+
       '<td class="num">'+mt[3](v.vb)+'</td>'+
+      '<td class="num b">'+mt[3](v.va)+'</td>'+
       '<td class="num '+(v.d>0?'pos':(v.d<0?'neg':''))+'">'+mt[3](v.d)+'</td>'+
       '<td class="num '+(v.d>0?'pos':(v.d<0?'neg':''))+'">'+(isFinite(v.p)?pp(v.p,1):'—')+'</td></tr>';
   }).join('');
   var vt=valores(raiz);
   var totLinha='<tr class="tot"><td></td><td></td><td class="l">TOTAL</td>'+
-    '<td class="num">'+mt[3](vt.va)+'</td><td class="num">'+mt[3](vt.vb)+'</td>'+
+    '<td class="num">'+mt[3](vt.vb)+'</td><td class="num">'+mt[3](vt.va)+'</td>'+
     '<td class="num '+(vt.d>0?'pos':'neg')+'">'+mt[3](vt.d)+'</td>'+
     '<td class="num '+(vt.d>0?'pos':'neg')+'">'+(isFinite(vt.p)?pp(vt.p,1):'—')+'</td></tr>';
 
@@ -4299,21 +4786,35 @@ function renderRanking(){
   }).filter(function(x){ return x.v.va!==0 || x.v.vb!==0; });
   var altas=prim.slice().sort(function(a,b){ return b.v.d-a.v.d; }).slice(0, S.rank.n);
   var quedas=prim.slice().sort(function(a,b){ return a.v.d-b.v.d; }).slice(0, S.rank.n);
-  function mini(lista, titulo){
+  function mini(lista, titulo, idTab){
+    /* soma só o que está listado — é o total daquele recorte de altas ou quedas */
+    var sa=0, sb=0;
+    lista.forEach(function(x){ sa+=x.v.va; sb+=x.v.vb; });
+    var sd=sa-sb, sp = sb!==0 ? sd/Math.abs(sb) : NaN;
+    var somavel = ['fat','lt','un'].indexOf(S.rank.met)>=0;
     return card(titulo,
-      '<div class="tw h50"><table class="t"><thead><tr>'+
-      '<th class="c" style="min-width:48px">POS '+aAt.substring(2)+'</th>'+
+      '<div class="fbar">'+ltabCtl(idTab)+'</div>'+
+      '<div class="tw h50"><table class="t'+ltabCls(idTab)+'"'+ltabStyle(idTab)+'><thead><tr>'+
       '<th class="c" style="min-width:60px">POS '+aAn.substring(2)+'</th>'+
+      '<th class="c" style="min-width:56px">POS '+aAt.substring(2)+'</th>'+
       '<th class="l" style="min-width:220px">'+esc(dim(S.rank.dim)[1])+'</th>'+
-      '<th>'+aAt+'</th><th>'+aAn+'</th><th>&Delta;</th><th>&Delta; %</th></tr></thead><tbody>'+
+      '<th style="min-width:92px">'+aAn+'</th><th style="min-width:92px">'+aAt+'</th>'+
+      '<th style="min-width:88px">&Delta;</th><th style="min-width:70px">&Delta; %</th></tr></thead><tbody>'+
       lista.map(function(x){
-        return '<tr><td class="c b">'+(x.no.posA||'—')+'º</td>'+
-          '<td class="c muted">'+(x.no.posB||'—')+'º'+seta(x.no)+'</td>'+
+        return '<tr><td class="c muted">'+(x.no.posB||'—')+'º</td>'+
+          '<td class="c b">'+(x.no.posA||'—')+'º'+seta(x.no)+'</td>'+
           '<td class="l b">'+esc(String(x.k).substring(0,60))+(x.no.zl?' <span class="pill az">ZL</span>':'')+'</td>'+
-          '<td class="num">'+mt[3](x.v.va)+'</td><td class="num">'+mt[3](x.v.vb)+'</td>'+
+          '<td class="num">'+mt[3](x.v.vb)+'</td><td class="num">'+mt[3](x.v.va)+'</td>'+
           '<td class="num '+(x.v.d>0?'pos':'neg')+'">'+mt[3](x.v.d)+'</td>'+
           '<td class="num '+(x.v.d>0?'pos':'neg')+'">'+(isFinite(x.v.p)?pp(x.v.p,1):'—')+'</td></tr>';
-      }).join('')+'</tbody></table></div>', '', true);
+      }).join('')+'</tbody><tfoot>'+
+      '<tr class="tot"><td></td><td></td><td class="l">TOTAL DA LISTA</td>'+
+        '<td class="num">'+(somavel?mt[3](sb):'—')+'</td>'+
+        '<td class="num">'+(somavel?mt[3](sa):'—')+'</td>'+
+        '<td class="num '+(sd>0?'pos':'neg')+'">'+(somavel?mt[3](sd):'—')+'</td>'+
+        '<td class="num '+(sd>0?'pos':'neg')+'">'+(somavel&&isFinite(sp)?pp(sp,1):'—')+'</td></tr>'+
+      '</tfoot></table></div>',
+      somavel?'':'métrica de preço não soma — o total da lista fica em branco', true);
   }
 
   function selN(n, val, obrig){
@@ -4340,6 +4841,7 @@ function renderRanking(){
     '<div class="fb" style="min-width:auto"><label class="fl">&nbsp;</label>'+
       '<button class="btn sm" onclick="S.rank.fech={};redesenhar(renderTudo)">expandir</button> '+
       '<button class="btn sm" onclick="rankRecolher()">recolher</button></div>'+
+    ltabCtl('rank')+
     '</div>'+
     (r.soUm
       ? '<div class="warn small">'+aAt+' e '+aAn+' não têm nenhum mês em comum na base — '+
@@ -4351,15 +4853,15 @@ function renderRanking(){
 
   h('tela').innerHTML =
     card('Ranking &middot; '+aAt+' &times; '+aAn+' &middot; '+esc(mt[1]),
-      ctl+'<div class="tw h60 sticky1"><table class="t"><thead><tr>'+
-      '<th class="c" style="min-width:56px">POS. '+aAt+'</th>'+
+      ctl+'<div class="tw h60 hfit sticky1"><table class="t'+ltabCls('rank')+'"'+ltabStyle('rank')+'><thead><tr>'+
       '<th class="c" style="min-width:72px">POS. '+aAn+'</th>'+
+      '<th class="c" style="min-width:56px">POS. '+aAt+'</th>'+
       '<th class="l" style="min-width:320px">'+esc(niveis.map(function(d){return dim(d)[1];}).join(' ▸ '))+'</th>'+
-      '<th style="min-width:100px">'+aAt+' ACUM.</th><th style="min-width:100px">'+aAn+' ACUM.</th>'+
+      '<th style="min-width:100px">'+aAn+' ACUM.</th><th style="min-width:100px">'+aAt+' ACUM.</th>'+
       '<th style="min-width:96px">&Delta;</th><th style="min-width:74px">&Delta; %</th>'+
-      '</tr></thead><tbody>'+corpo+totLinha+'</tbody></table></div>', '', true)+
-    '<div class="g2">'+mini(altas,'Maiores altas &middot; '+esc(dim(S.rank.dim)[1]))+
-    mini(quedas,'Maiores quedas &middot; '+esc(dim(S.rank.dim)[1]))+'</div>';
+      '</tr></thead><tbody>'+corpo+'</tbody><tfoot>'+totLinha+'</tfoot></table></div>', '', true)+
+    '<div class="g2">'+mini(altas,'Maiores altas &middot; '+esc(dim(S.rank.dim)[1]),'rkA')+
+    mini(quedas,'Maiores quedas &middot; '+esc(dim(S.rank.dim)[1]),'rkQ')+'</div>';
 }
 function setRankDim(n,v){
   if(n===1) S.rank.dim=v; else if(n===2){ S.rank.dim2=v; if(!v) S.rank.dim3=''; } else S.rank.dim3=v;
@@ -4497,6 +4999,7 @@ function renderDist(){
     ufs.map(function(u){ return '<th class="rot">'+esc(u)+'</th>'; }).join('')+
     '</tr></thead><tbody>'+corpo+'</tbody></table></div>', '', true);
 }
+
 /* ==========================================================================
    TRATAMENTOS — uniões de SKU e lista de possíveis erros
    ========================================================================== */
@@ -4708,7 +5211,7 @@ var ERR_TIPOS = {
   semnome:{t:'Sem descrição de produto', s:'a'},
   semcls: {t:'Relevante e sem classificação', s:'a'},
   volzero:{t:'Sem volumetria', s:'a'},
-  fardo:  {t:'Provável fardo (volumetria da base muito maior que a do cadastro)', s:'a'},
+  fardo:  {t:'Provável fardo — a unidade está errada', s:'a'},
   voldiv: {t:'Volumetria da base diverge do cadastro', s:'m'},
   dupnome:{t:'Mesma descrição em códigos diferentes', s:'m'},
   precoout:{t:'R$/unidade muito fora da mediana da subcategoria', s:'m'},
@@ -4716,10 +5219,61 @@ var ERR_TIPOS = {
   semmarca:{t:'Sem marca identificada', s:'b'},
   serie:  {t:'Buraco na série mensal', s:'b'}
 };
+/* ==========================================================================
+   APONTAMENTOS JÁ VERIFICADOS (v1.4)
+   Nem todo apontamento é erro. Marcando "está certo", ele sai da lista e a
+   marca fica guardada por código de barras + tipo, indo junto no .json.
+   ========================================================================== */
+var ERROK = {};
+function errChave(e){ return e.cb+'|'+e.tipo; }
+function errLimparCache(){ _errCache=null; }
+function errVerificar(cb, tipo){
+  ERROK[cb+'|'+tipo]=1;
+  _errCache=null;
+  redesenhar(renderTudo);
+  toast('Marcado como correto — sai da lista.');
+}
+function errDesverificar(cb, tipo){
+  delete ERROK[cb+'|'+tipo];
+  _errCache=null;
+  redesenhar(renderTudo);
+}
+function errLimparVerificados(){
+  if(!confirm('Tirar a marca de TODOS os apontamentos verificados?\n\nEles voltam para a lista de erros.')) return;
+  ERROK={}; _errCache=null; redesenhar(renderTudo);
+}
+
+/* ------------------------------------------------- fardo pela descrição --
+   "27X200", "12X473ML", "473ML 12X", "SUCO 1L 6X" — número seguido de X e
+   outro número quase sempre é fardo. Devolve {pack, ml} quando reconhece.   */
+function packDoNome(nome){
+  var n=semAcento(nome).replace(/,/g,'.');
+  var m;
+  m=n.match(/(?:^|[^0-9.])(\d{1,3})\s*X\s*(\d{2,5}(?:\.\d+)?)\s*(ML|L)?(?![A-Z0-9])/);
+  if(m){
+    var ml1=parseFloat(m[2]); if(m[3]==='L') ml1*=1000;
+    if(+m[1]>1 && ml1>=20) return {pack:+m[1], ml:ml1};
+  }
+  m=n.match(/(\d{1,5}(?:\.\d+)?)\s*(ML|L)\b[^0-9]{0,6}(\d{1,3})\s*X(?![A-Z0-9])/);
+  if(m){
+    var ml2=parseFloat(m[1]); if(m[2]==='L') ml2*=1000;
+    if(+m[3]>1 && ml2>=20) return {pack:+m[3], ml:ml2};
+  }
+  var mp=n.match(/(?:^|[^0-9A-Z])(\d{1,3})\s*X(?![A-Z0-9])/);
+  var mv=n.match(/(\d{1,5}(?:\.\d+)?)\s*(ML|L)\b/);
+  if(mp && mv && +mp[1]>1){
+    var ml3=parseFloat(mv[1]); if(mv[2]==='L') ml3*=1000;
+    if(ml3>=20) return {pack:+mp[1], ml:ml3};
+  }
+  return null;
+}
+
 var _errCache=null, _errSig=null;
 function errosLista(){
   var C=ctx(); if(!C) return [];
-  if(_errCache && _errSig===C.sig+'|'+Object.keys(UNI).length+'|'+Object.keys(CLS).length) return _errCache;
+  var sigNovo=C.sig+'|'+Object.keys(UNI).length+'|'+Object.keys(CLS).length+'|'+
+              Object.keys(ERROK).length+'|'+(S.err.verif?1:0)+'|'+Object.keys(VOLOV).length;
+  if(_errCache && _errSig===sigNovo) return _errCache;
   var out=[];
   var totF=C.totFat||1;
   /* mediana de R$/un por subcategoria */
@@ -4744,7 +5298,10 @@ function errosLista(){
     var P=D.prod[i], f=C.fat[i];
     var rel = f/totF;
     function add(tipo, det, acao){
-      out.push({tipo:tipo, i:i, cb:P.cb, nome:P.nome, fat:f, det:det, acao:acao||'', sev:ERR_TIPOS[tipo].s});
+      var vf = !!ERROK[P.cb+'|'+tipo];
+      if(vf && !S.err.verif) return;
+      out.push({tipo:tipo, i:i, cb:P.cb, nome:P.nome, fat:f, det:det, acao:acao||'',
+                sev:ERR_TIPOS[tipo].s, verif:vf});
     }
     if(!eanValido(P.cb)) add('cbinv','“'+P.cb+'” não passa no dígito verificador EAN');
     if(!P.nome || P.nome.indexOf('(sem descri')>=0 || P.nome.indexOf('sem identifica')>=0)
@@ -4753,13 +5310,31 @@ function errosLista(){
       [(!P.sub?'subcategoria':''),(!P.sabor?'sabor':''),
        (!P.pais && ['VINHO','ESPUMANTE','LICOR'].indexOf(P.cat)>=0?'país':'')].filter(Boolean).join(' + '));
     if(!(P.vol>0)) add('volzero','sem volumetria na base e sem valor informado');
+    var achouFardo=false;
     if(P.volSug>0 && D.volBase[i]>0){
       var raz=D.volBase[i]/P.volSug;
-      if(raz>1.8 && !P.volMan) add('fardo','base traz '+nf(D.volBase[i],0)+' ml/und e o cadastro '+
-        nf(P.volSug,0)+' ml — parece fardo de '+nf(raz,1)+' unidades', 'vol:'+round(P.volSug,0));
-      else if(!P.volMan && Math.abs(raz-1)>0.05 && raz<=1.8)
+      if(raz>1.8 && !P.volMan){
+        add('fardo','base traz '+nf(D.volBase[i],0)+' ml/und e o cadastro '+
+          nf(P.volSug,0)+' ml — parece fardo de '+nf(raz,1)+' unidades', 'vol:'+round(P.volSug,0));
+        achouFardo=true;
+      }else if(!P.volMan && Math.abs(raz-1)>0.05 && raz<=1.8)
         add('voldiv','base '+nf(D.volBase[i],0)+' ml &times; cadastro '+nf(P.volSug,0)+' ml',
             'vol:'+round(P.volSug,0));
+    }
+    /* fardo escrito na descrição: 27x200, 12X473ML, 473ML 6X */
+    if(!achouFardo && !P.volMan){
+      var pk=packDoNome(P.nome);
+      if(pk && pk.pack>1){
+        var esperado=pk.pack*pk.ml, vb=D.volBase[i];
+        var bate = vb>0 && Math.abs(vb-esperado)/esperado < 0.15;
+        if(bate || (vb>0 && vb > pk.ml*1.6)){
+          add('fardo','a descrição traz <b>'+pk.pack+'&times;'+nf(pk.ml,0)+' ml</b>'+
+            (bate? ' e a base confirma ('+nf(vb,0)+' ml/und, que é o fardo inteiro)'
+                 : ' e a base traz '+nf(vb,0)+' ml/und')+
+            ' — a unidade deveria ser '+nf(pk.ml,0)+' ml', 'vol:'+round(pk.ml,0));
+          achouFardo=true;
+        }
+      }
     }
     var med=porSub[P.cat+'|'+(P.sub||'-')];
     var unr2 = P.vol>0? C.ml[i]/P.vol : C.un[i];
@@ -4770,7 +5345,10 @@ function errosLista(){
     }
     var c=CLS[P.cb]||{};
     ['sub','sabor','pais','emb','conc'].forEach(function(k){
-      if(ehLixo(c[k])) out.push({tipo:'lixo', i:i, cb:P.cb, nome:P.nome, fat:f, sev:'b',
+      if(!ehLixo(c[k])) return;
+      var vfl=!!ERROK[P.cb+'|lixo'];
+      if(vfl && !S.err.verif) return;
+      out.push({tipo:'lixo', i:i, cb:P.cb, nome:P.nome, fat:f, sev:'b', verif:vfl,
         det:'campo '+k+' está com “'+up(c[k])+'”', acao:'limpar:'+k});
     });
     if(P.mk.indexOf('(sem')>=0 && rel>0.0005) add('semmarca','representa '+pc(rel,3)+' do recorte');
@@ -4781,7 +5359,9 @@ function errosLista(){
     var ord=lista.slice().sort(function(a,b){ return (D.fatTot[b]||0)-(D.fatTot[a]||0); });
     var P=D.prod[ord[0]];
     if(!C.skuM[ord[0]]) return;
-    out.push({tipo:'dupnome', i:ord[0], cb:P.cb, nome:P.nome, fat:D.fatTot[ord[0]]||0, sev:'m',
+    var vfd=!!ERROK[P.cb+'|dupnome'];
+    if(vfd && !S.err.verif) return;
+    out.push({tipo:'dupnome', i:ord[0], cb:P.cb, nome:P.nome, fat:D.fatTot[ord[0]]||0, sev:'m', verif:vfd,
       det:lista.length+' códigos com a mesma descrição: '+ord.map(function(x){return D.prod[x].cb;}).join(', '),
       acao:'unir:'+ord.map(function(x){return D.prod[x].cb;}).join(',')});
   });
@@ -4796,7 +5376,9 @@ function errosLista(){
       var faltam=pers.filter(function(pi){ return !cruz.cel[k+'\u0002'+DB.pers[pi]]; });
       if(faltam.length && faltam.length<pers.length*0.6){
         var P=D.prod[idx];
-        out.push({tipo:'serie', i:idx, cb:P.cb, nome:P.nome, fat:C.fat[idx], sev:'b',
+        var vfs=!!ERROK[P.cb+'|serie'];
+        if(vfs && !S.err.verif) return;
+        out.push({tipo:'serie', i:idx, cb:P.cb, nome:P.nome, fat:C.fat[idx], sev:'b', verif:vfs,
           det:'sem venda em '+faltam.length+' mês(es): '+faltam.slice(0,6).map(function(pi){return perNome(DB.pers[pi]);}).join(', ')});
       }
     });
@@ -4805,7 +5387,7 @@ function errosLista(){
     var o={a:0,m:1,b:2};
     return o[a.sev]-o[b.sev] || b.fat-a.fat;
   });
-  _errCache=out; _errSig=C.sig+'|'+Object.keys(UNI).length+'|'+Object.keys(CLS).length;
+  _errCache=out; _errSig=sigNovo;
   return out;
 }
 function renderErros(){
@@ -4821,26 +5403,41 @@ function renderErros(){
   }).join('');
   var vis=L.filter(function(e){ return !S.err.tipo || e.tipo===S.err.tipo; }).slice(0,600);
   var corpo=vis.map(function(e){
-    return '<tr class="'+(e.sev==='a'?'err':(e.sev==='m'?'warnr':''))+'">'+
-      '<td class="l"><span class="sev '+e.sev+'"></span>'+esc(ERR_TIPOS[e.tipo].t)+'</td>'+
+    return '<tr class="'+(e.verif?'verif':(e.sev==='a'?'err':(e.sev==='m'?'warnr':'')))+'">'+
+      '<td class="l"><span class="sev '+e.sev+'"></span>'+esc(ERR_TIPOS[e.tipo].t)+
+        (e.verif?' <span class="pill ok">verificado</span>':'')+'</td>'+
       '<td class="l">'+esc(String(e.nome).substring(0,58))+'<div class="tag">'+esc(e.cb)+'</div></td>'+
       '<td class="num">'+mmr(e.fat)+'</td>'+
       '<td class="l small">'+e.det+'</td>'+
       '<td class="c nowrap">'+errAcoes(e)+'</td></tr>';
   }).join('');
+  var nVerif=Object.keys(ERROK).length;
   h('tela').innerHTML = card('Possíveis erros &middot; '+nf(L.length)+' apontamentos no recorte',
     '<div class="fbar"><div class="chips">'+
       '<button class="chip'+(S.err.tipo?'':' on')+'" onclick="S.err.tipo=\'\';redesenhar(renderTudo)">todos</button>'+
       chips+'</div></div>'+
-    '<div class="tw h70"><table class="t"><thead><tr><th class="l" style="min-width:230px">Tipo</th>'+
-    '<th class="l" style="min-width:280px">SKU</th><th>Faturamento</th>'+
-    '<th class="l" style="min-width:320px">O que está acontecendo</th><th style="min-width:210px">Tratar</th>'+
+    '<div class="fbar" style="border-top:1px solid var(--bd)">'+
+      '<div class="fb" style="min-width:auto"><label class="fl">Já verificados</label>'+
+        '<button class="btn sm '+(S.err.verif?'on':'')+'" onclick="S.err.verif=!S.err.verif;_errCache=null;redesenhar(renderTudo)">'+
+        (S.err.verif?'mostrando os '+nf(nVerif)+' verificados':'ocultos ('+nf(nVerif)+')')+'</button></div>'+
+      (nVerif?'<div class="fb" style="min-width:auto"><label class="fl">&nbsp;</label>'+
+        '<button class="btn sm" onclick="errLimparVerificados()">tirar todas as marcas</button></div>':'')+
+      ltabCtl('err')+
+    '</div>'+
+    '<div class="tw h70"><table class="t'+ltabCls('err')+'"'+ltabStyle('err')+'>'+
+    '<thead><tr><th class="l" style="min-width:230px">Tipo</th>'+
+    '<th class="l" style="min-width:280px">SKU</th><th style="min-width:96px">Faturamento</th>'+
+    '<th class="l" style="min-width:320px">O que está acontecendo</th><th style="min-width:250px">Tratar</th>'+
     '</tr></thead><tbody>'+corpo+'</tbody></table></div>'+
     (L.length>vis.length?'<div class="info small">Mostrando os '+vis.length+' primeiros — use os filtros do topo para reduzir.</div>':''),
     'vermelho = grave &middot; amarelo = revisar &middot; azul = informativo', true);
 }
 function errAcoes(e){
-  var b='<button class="btn xs" onclick="irClassificar(\''+esc(e.cb)+'\')">classificar</button> '+
+  if(e.verif)
+    return '<button class="btn xs" onclick="errDesverificar(\''+esc(e.cb)+'\',\''+e.tipo+'\')">voltar para a lista</button>';
+  var b='<button class="btn xs ok" title="já analisei, não é erro" onclick="errVerificar(\''+
+        esc(e.cb)+'\',\''+e.tipo+'\')">&#10003; está certo</button> '+
+        '<button class="btn xs" onclick="irClassificar(\''+esc(e.cb)+'\')">classificar</button> '+
         '<button class="btn xs" onclick="gBuscar(\''+esc(e.cb)+'\',\'img\',true)">G</button>';
   if(e.acao && e.acao.indexOf('vol:')===0)
     b='<button class="btn xs p" onclick="setCls(\''+esc(e.cb)+'\',\'vol\','+e.acao.substring(4)+')">usar '+
@@ -4860,6 +5457,227 @@ function irClassificar(cb){
   ctxLimpar();
   irPara('classif');
 }
+
+/* ==========================================================================
+   CENAS (v1.5)
+   Uma cena é a FOTO da tela: o recorte dos filtros do topo, as dimensões
+   escolhidas em cada tabela, os níveis abertos, a ordenação, as métricas dos
+   gráficos, as colunas ocultas, as larguras e a aba em que você estava.
+   Não guarda dado nenhum — o dado continua vindo do cubo. Por isso uma cena
+   salva hoje vale para a base do mês que vem: é a mesma montagem sobre
+   números novos.
+   As cenas vão no .json (modelo e classificação) e podem ser exportadas uma
+   a uma, para mandar a montagem para outra pessoa que tenha o mesmo modelo.
+   ========================================================================== */
+var CENAS = [];
+var CENA_INI = '';        /* id da cena aplicada assim que o modelo carrega */
+
+var CENA_CHAVES = ['merc','piv','evo','pri','rank','shr','dist','cls','err','uni'];
+
+function cenaClone(o){ return JSON.parse(JSON.stringify(o===undefined?null:o)); }
+function cenaId(){ return 'c'+Date.now().toString(36)+Math.floor(Math.random()*4096).toString(36); }
+
+/* texto curto do recorte, para a pessoa reconhecer a cena sem abrir */
+function cenaResumoFiltros(f){
+  var p=[];
+  GF.defs().forEach(function(d){
+    if(d.esc==='num') return;
+    var vs=(f.sel||{})[d.key]||[];
+    if(!vs.length) return;
+    if(d.key==='base'){ p.push(vs[0]); return; }
+    var mostra = vs.slice(0,2).map(function(v){ return GF.rotulo(d.key, v); }).join(', ');
+    p.push(d.label+': '+mostra+(vs.length>2?' +'+(vs.length-2):''));
+  });
+  ['vol','ru','rl','ffat'].forEach(function(k){
+    var x=(f.faixa||{})[k]; if(!x) return;
+    if(x.min===''&&x.max==='') return;
+    p.push(GF.def(k).label+' '+(x.min===''?'até':(x.max===''?'a partir de':'de'))+' '+
+      (x.min!==''?nf(x.min,0):'')+(x.min!==''&&x.max!==''?' a ':'')+(x.max!==''?nf(x.max,0):''));
+  });
+  if(f.busca) p.push('busca “'+f.busca+'”');
+  return p.length? p.join(' · ') : 'sem recorte (mercado inteiro)';
+}
+function cenaCapturar(nome){
+  var C = (DB && D.pronto) ? ctx() : null;
+  var est={};
+  CENA_CHAVES.forEach(function(k){ if(S[k]!==undefined) est[k]=cenaClone(S[k]); });
+  if(est.cls) est.cls.foco='';          /* linha em foco não faz parte da montagem */
+  var f=filtrosSerial();
+  return {
+    id: cenaId(),
+    nome: String(nome||'').trim() || 'Cena sem nome',
+    em: new Date().toISOString(),
+    versao: VERSAO,
+    tela: S.tela,
+    filtros: f,
+    estado: est,
+    larg: cenaClone(S.larg||{}),
+    ltab: cenaClone(S.ltab||{}),
+    resumo: cenaResumoFiltros(f),
+    fat: C? C.totFat : 0,
+    nsku: C? C.nAtivos : 0
+  };
+}
+function cenaSalvar(nome){
+  if(!DB){ toast('Importe a base antes de salvar uma cena.'); return; }
+  var c=cenaCapturar(nome);
+  CENAS.push(c);
+  redesenhar(renderTudo);
+  toast('Cena <b>'+esc(c.nome)+'</b> salva.');
+  return c;
+}
+function cenaDe(id){ return CENAS.filter(function(c){ return c.id===id; })[0] || null; }
+function cenaAplicar(id, silencioso){
+  var c=cenaDe(id); if(!c){ toast('Cena não encontrada.'); return; }
+  GF.limpar();
+  (c.estado? Object.keys(c.estado):[]).forEach(function(k){
+    if(S[k]!==undefined) S[k]=cenaClone(c.estado[k]);
+  });
+  S.larg=cenaClone(c.larg||{});
+  S.ltab=cenaClone(c.ltab||{});
+  filtrosAplicar(c.filtros);
+  GF.garantirBase();
+  GF.podar();                 /* o que não existe mais nesta base cai fora */
+  ctxLimpar();
+  irPara(c.tela||'mercado');
+  if(!silencioso) toast('Cena <b>'+esc(c.nome)+'</b> aplicada.');
+}
+function cenaAtualizar(id){
+  var i=CENAS.map(function(c){return c.id;}).indexOf(id);
+  if(i<0) return;
+  var nome=CENAS[i].nome, novo=cenaCapturar(nome);
+  novo.id=CENAS[i].id;
+  CENAS[i]=novo;
+  redesenhar(renderTudo);
+  toast('Cena <b>'+esc(nome)+'</b> atualizada com a tela de agora.');
+}
+function cenaRenomear(id){
+  var c=cenaDe(id); if(!c) return;
+  var n=prompt('Nome da cena:', c.nome);
+  if(n===null) return;
+  c.nome=String(n).trim()||c.nome;
+  redesenhar(renderTudo);
+}
+function cenaDuplicar(id){
+  var c=cenaDe(id); if(!c) return;
+  var d=cenaClone(c); d.id=cenaId(); d.nome=c.nome+' (cópia)'; d.em=new Date().toISOString();
+  CENAS.push(d);
+  redesenhar(renderTudo);
+  toast('Cena duplicada.');
+}
+function cenaExcluir(id){
+  var c=cenaDe(id); if(!c) return;
+  if(!confirm('Excluir a cena “'+c.nome+'”?')) return;
+  CENAS=CENAS.filter(function(x){ return x.id!==id; });
+  if(CENA_INI===id) CENA_INI='';
+  redesenhar(renderTudo);
+}
+function cenaInicial(id){
+  CENA_INI = (CENA_INI===id) ? '' : id;
+  redesenhar(renderTudo);
+  toast(CENA_INI? 'Esta cena passa a ser aplicada ao carregar o modelo.' : 'Nenhuma cena de abertura.');
+}
+function cenaAplicarInicial(){
+  if(!CENA_INI) return;
+  if(!cenaDe(CENA_INI)) return;
+  setTimeout(function(){ cenaAplicar(CENA_INI, true); }, 60);
+}
+/* ---------------------------------------------- exportar / importar uma -- */
+function cenaExportar(id){
+  var c=cenaDe(id); if(!c) return;
+  var o={tipo:'scanntech-cena', versao:VERSAO, em:new Date().toISOString(), cena:c};
+  baixar('Cena_'+c.nome.replace(/[^\wÀ-ÿ -]/g,'').replace(/\s+/g,'_')+'_'+carimbo()+'.json',
+    new Blob([JSON.stringify(o)], {type:'application/json'}));
+  toast('Cena exportada.');
+}
+function cenasExportarTodas(){
+  if(!CENAS.length){ toast('Nenhuma cena salva.'); return; }
+  var o={tipo:'scanntech-cena', versao:VERSAO, em:new Date().toISOString(), cenas:CENAS, inicial:CENA_INI};
+  baixar('Cenas_'+carimbo()+'.json', new Blob([JSON.stringify(o)], {type:'application/json'}));
+  toast(nf(CENAS.length)+' cenas exportadas.');
+}
+/* devolve quantas entraram; usado pelo carregador de .json */
+function cenasReceber(j){
+  var n=0;
+  var lista = j.cenas || (j.cena? [j.cena] : []);
+  lista.forEach(function(c){
+    if(!c || !c.estado) return;
+    if(cenaDe(c.id)) c.id=cenaId();      /* id repetido vira cena nova */
+    CENAS.push(c); n++;
+  });
+  var ini=j.inicial||j.cenaIni;
+  if(ini && cenaDe(ini)) CENA_INI=ini;
+  return n;
+}
+
+/* ================================================================= TELA == */
+function renderCenas(){
+  var nome='<div class="fbar">'+
+    '<div class="fb wide"><label class="fl">Nome da cena</label>'+
+      '<input type="text" id="cenaNome" placeholder="ex.: Nordeste · vinhos · últimos 12 meses" '+
+      'onkeydown="if(event.key===\'Enter\'){cenaSalvarDoCampo();}"></div>'+
+    '<div class="fb" style="min-width:auto"><label class="fl">&nbsp;</label>'+
+      '<button class="btn p" onclick="cenaSalvarDoCampo()">salvar a tela de agora</button> '+
+      '<button class="btn sm" onclick="document.getElementById(\'cfile\').click()">importar cena (.json)</button>'+
+      '<input type="file" id="cfile" accept=".json" style="display:none" '+
+        'onchange="receberArquivos(this.files);this.value=\'\'">'+
+      (CENAS.length?' <button class="btn sm" onclick="cenasExportarTodas()">exportar todas</button>':'')+
+      '</div>'+
+    '</div>';
+
+  var atual='<div class="okb small">Agora na tela: <b>'+esc(cenaResumoFiltros(filtrosSerial()))+'</b>'+
+    ' &middot; aba <b>'+esc(telaDe(S.tela)[1].replace(/&amp;/g,'&'))+'</b></div>';
+
+  if(!CENAS.length){
+    h('tela').innerHTML = card('Cenas', nome+atual+
+      '<div class="info">Nenhuma cena salva ainda.<br><br>'+
+      'Uma cena guarda a <b>montagem</b> da tela — o recorte dos filtros, as dimensões abertas em cada '+
+      'tabela, os níveis expandidos, a ordenação, as métricas dos gráficos, as colunas ocultas e as '+
+      'larguras. Não guarda números: aplicada sobre a base do mês que vem, ela mostra a mesma '+
+      'montagem com os dados novos.<br><br>'+
+      'Monte a tela como você quer ver, volte aqui, dê um nome e salve.</div>',
+      'as cenas vão junto no .json do modelo', true);
+    return;
+  }
+
+  var linhas=CENAS.slice().reverse().map(function(c){
+    var ini=(CENA_INI===c.id);
+    return '<tr'+(ini?' class="tot"':'')+'>'+
+      '<td class="l b">'+esc(c.nome)+
+        (ini?' <span class="pill az" title="aplicada ao carregar o modelo">abertura</span>':'')+
+        '<div class="tag">'+esc(telaDe(c.tela||'mercado')[1].replace(/&amp;/g,'&'))+
+        ' &middot; '+new Date(c.em).toLocaleString('pt-BR')+'</div></td>'+
+      '<td class="l small">'+esc(c.resumo||'')+'</td>'+
+      '<td class="num">'+(c.fat?mmr(c.fat):'—')+'<div class="tag">'+(c.nsku?nf(c.nsku)+' SKUs':'')+'</div></td>'+
+      '<td class="c"><div class="gbtns" style="justify-content:center">'+
+        '<button class="btn xs p" onclick="cenaAplicar(\''+c.id+'\')">abrir</button>'+
+        '<button class="btn xs" onclick="cenaAtualizar(\''+c.id+'\')" title="grava a tela de agora nesta cena">atualizar</button>'+
+        '<button class="btn xs" onclick="cenaRenomear(\''+c.id+'\')">renomear</button>'+
+        '<button class="btn xs" onclick="cenaDuplicar(\''+c.id+'\')">duplicar</button>'+
+        '<button class="btn xs'+(ini?' ok':'')+'" onclick="cenaInicial(\''+c.id+'\')" '+
+          'title="aplicar esta cena assim que o modelo carregar">'+(ini?'✓ abertura':'abertura')+'</button>'+
+        '<button class="btn xs" onclick="cenaExportar(\''+c.id+'\')">.json</button>'+
+        '<button class="btn xs" onclick="cenaExcluir(\''+c.id+'\')">excluir</button>'+
+      '</div></td></tr>';
+  }).join('');
+
+  h('tela').innerHTML = card('Cenas &middot; '+nf(CENAS.length),
+    nome+atual+
+    '<div class="tw"><table class="t'+ltabCls('cena')+'"'+ltabStyle('cena')+'><thead><tr>'+
+    '<th class="l" style="min-width:230px">Cena</th>'+
+    '<th class="l" style="min-width:320px">Recorte guardado</th>'+
+    '<th style="min-width:110px">Faturamento ao salvar</th>'+
+    '<th style="min-width:330px">&nbsp;</th></tr></thead><tbody>'+linhas+'</tbody></table></div>'+
+    '<div class="info small">O faturamento ao lado é o que a cena movia <b>quando foi salva</b> — serve '+
+    'para reconhecer o recorte. Ao abrir a cena, os números são recalculados sobre a base que estiver '+
+    'carregada agora. Valores que não existem mais nesta base saem do recorte sozinhos.</div>',
+    'a cena guarda a montagem da tela, nunca os dados', true);
+}
+function cenaSalvarDoCampo(){
+  var el=h('cenaNome');
+  cenaSalvar(el? el.value : '');
+}
+
 /* ==========================================================================
    DADOS / JSON — estado da base, exportar e carregar o modelo, Excel
    ========================================================================== */
@@ -4896,6 +5714,8 @@ function exportarModelo(){
   var partes=['{"meta":', JSON.stringify(meta),
     ',"cls":', JSON.stringify(CLS), ',"vol":', JSON.stringify(VOLOV),
     ',"desc":', JSON.stringify(DESCOV), ',"uni":', JSON.stringify(UNI),
+    ',"errok":', JSON.stringify(Object.keys(ERROK)),
+    ',"cenas":', JSON.stringify(CENAS), ',"cenaIni":', JSON.stringify(CENA_INI),
     ',"cubo":{"cPer":"', b64De(DB.cPer.subarray(0,DB.n)),
     '","cUF":"',  b64De(DB.cUF.subarray(0,DB.n)),
     '","cBase":"',b64De(DB.cBase.subarray(0,DB.n)),
@@ -4944,6 +5764,8 @@ async function carregarJsonArquivo(file){
     DB.vUn=b64Para(c.vUn, Float64Array);  DB.vDN=b64Para(c.vDN, Float32Array);
     DB.vDP=b64Para(c.vDP, Float32Array);
     CLS=j.cls||{}; VOLOV=j.vol||{}; DESCOV=j.desc||{}; UNI=j.uni||{}; UNI_VER++;
+    ERROK={}; (j.errok||[]).forEach(function(k){ ERROK[k]=1; }); errLimparCache();
+    CENAS=j.cenas||[]; CENA_INI=j.cenaIni||'';
     D._sMl=null;
     AVISOS=m.avisos||[];
     if(m.estado) Object.keys(m.estado).forEach(function(k){ S[k]=m.estado[k]; });
@@ -4952,7 +5774,14 @@ async function carregarJsonArquivo(file){
     filtrosAplicar(m.filtros);
     bootSt('modelo carregado &middot; '+mm(DB.n)+' células');
     toast('Modelo carregado: '+mm(DB.n)+' células, '+nf(DB.skus.length)+' SKUs.');
-    setTimeout(function(){ mostrarBoot(false); abrirApp(); }, 250);
+    setTimeout(function(){ mostrarBoot(false); abrirApp(); cenaAplicarInicial(); }, 250);
+    return;
+  }
+  if(j.tipo==='scanntech-cena' || j.cena || (j.cenas && !j.cls)){
+    var nc=cenasReceber(j);
+    bootSt(nf(nc)+' cena(s) carregada(s)');
+    toast(nf(nc)+' cena(s) carregada(s) de '+esc(file.name)+'.');
+    if(DB && DB.n) redesenhar(renderTudo);
     return;
   }
   if(j.cls || j.tipo==='scanntech-classificacao'){
@@ -4961,6 +5790,8 @@ async function carregarJsonArquivo(file){
     Object.assign(VOLOV, j.vol||{});
     Object.assign(DESCOV, j.desc||{});
     Object.assign(UNI, j.uni||{}); UNI_VER++;
+    (j.errok||[]).forEach(function(k){ ERROK[k]=1; }); errLimparCache();
+    if(j.cenas) cenasReceber(j);
     if(DB) reindex();
     bootSt(nf(n)+' classificações carregadas');
     toast(nf(n)+' classificações carregadas de '+esc(file.name));
@@ -5154,11 +5985,12 @@ function removerArquivo(i){
 }
 function novaSessao(){
   if(!confirm('Apagar tudo e recomeçar? O que não estiver exportado se perde.')) return;
-  DB=null; CLS={}; UNI={}; VOLOV={}; DESCOV={}; AVISOS=[];
+  DB=null; CLS={}; UNI={}; VOLOV={}; DESCOV={}; ERROK={}; CENAS=[]; CENA_INI=''; AVISOS=[];
   D={rep:null,prod:null,volBase:null,volEf:null,pronto:false,nomeIx:null};
   ctxLimpar();
   location.reload();
 }
+
 /* ==========================================================================
    NAVEGAÇÃO E BOOT
    ========================================================================== */
@@ -5174,6 +6006,7 @@ var TELAS = [
   ['classif' ,'Classificação'    , renderClassif , true , 'm'],
   ['unioes'  ,'Uniões de SKU'    , renderUnioes  , true , 'm'],
   ['erros'   ,'Possíveis erros'  , renderErros   , true , 'm'],
+  ['cenas'   ,'Cenas'            , renderCenas   , false, 'm'],
   ['dados'   ,'Dados / JSON'     , renderDados   , false, 'm']
 ];
 function telaDe(id){
@@ -5211,6 +6044,8 @@ function renderTudo(){
   }
   atualizarTopo();
   t[2]();
+  ltabAjustar();
+  tabAltura();
 }
 function gfilTog(){
   var g=h('gfil');
@@ -5234,6 +6069,7 @@ ligarDrop();
 window.addEventListener('error', function(e){
   console.error(e.error||e.message);
 });
+
 </script>
 </body>
 </html>
